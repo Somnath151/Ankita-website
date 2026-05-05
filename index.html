@@ -1,822 +1,1312 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>About Me Pls — Skip the Small Talk</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Me Pls — Skip the Small Talk</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400;1,9..144,500;1,9..144,600&display=swap" rel="stylesheet">
 
-<!-- PDF library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<script>
-  // Fallback flag — set after jsPDF loads (or fails)
-  window._jspdfReady = false;
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      window._jspdfReady = !!(window.jspdf && window.jspdf.jsPDF);
-    }, 500);
-  });
-</script>
+  <!-- PDF library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script>
+    // Fallback flag — set after jsPDF loads (or fails)
+    window._jspdfReady = false;
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        window._jspdfReady = !!(window.jspdf && window.jspdf.jsPDF);
+      }, 500);
+    });
+  </script>
 
-<style>
-  :root {
-    /* Soft Pink theme (default) */
-    --bg: #FFF5F1;
-    --bg-2: #FFEDE4;
-    --cream: #FFFAF5;
-    --white: #FFFFFF;
+  <style>
+    :root {
+      /* Soft Pink theme (default) */
+      --bg: #FFF5F1;
+      --bg-2: #FFEDE4;
+      --cream: #FFFAF5;
+      --white: #FFFFFF;
 
-    --ink: #2B1D1A;
-    --ink-2: #5B4843;
-    --ink-3: #8A746E;
-    --ink-4: #B8A8A3;
+      --ink: #2B1D1A;
+      --ink-2: #5B4843;
+      --ink-3: #8A746E;
+      --ink-4: #B8A8A3;
 
-    --accent: #FF87A8;       /* primary accent */
-    --accent-2: #E8528A;     /* darker accent */
-    --accent-soft: #FFE0EA;  /* soft tint */
+      --accent: #FF87A8;       /* primary accent */
+      --accent-2: #E8528A;     /* darker accent */
+      --accent-soft: #FFE0EA;  /* soft tint */
 
-    --secondary: #FFB085;    /* secondary (peach) */
-    --secondary-2: #F08A55;
-    --secondary-soft: #FFE4D1;
+      --secondary: #FFB085;    /* secondary (peach) */
+      --secondary-2: #F08A55;
+      --secondary-soft: #FFE4D1;
 
-    --tertiary: #B39DDB;     /* tertiary (lavender) */
-    --tertiary-2: #8E74C7;
-    --tertiary-soft: #EDE4FB;
+      --tertiary: #B39DDB;     /* tertiary (lavender) */
+      --tertiary-2: #8E74C7;
+      --tertiary-soft: #EDE4FB;
 
-    --mint: #A4D8C6;
-    --mint-2: #6AB39A;
-    --mint-soft: #DEF2EA;
+      --mint: #A4D8C6;
+      --mint-2: #6AB39A;
+      --mint-soft: #DEF2EA;
 
-    --butter: #FFD88E;
-    --butter-soft: #FFF0C9;
+      --butter: #FFD88E;
+      --butter-soft: #FFF0C9;
 
-    --border: rgba(43, 29, 26, 0.08);
-    --border-strong: rgba(43, 29, 26, 0.14);
+      --border: rgba(43, 29, 26, 0.08);
+      --border-strong: rgba(43, 29, 26, 0.14);
 
-    --serif: "Fraunces", Georgia, serif;
-    --sans: "DM Sans", system-ui, sans-serif;
-    --script: "Caveat", cursive;
+      --serif: "Fraunces", Georgia, serif;
+      --sans: "DM Sans", system-ui, sans-serif;
+      --script: "Caveat", cursive;
 
-    /* Legacy aliases (keep old class names working) */
-    --pink: var(--accent);
-    --pink-2: var(--accent-2);
-    --pink-soft: var(--accent-soft);
-    --peach: var(--secondary);
-    --peach-2: var(--secondary-2);
-    --peach-soft: var(--secondary-soft);
-    --lavender: var(--tertiary);
-    --lavender-2: var(--tertiary-2);
-    --lavender-soft: var(--tertiary-soft);
-  }
+      /* Legacy aliases (keep old class names working) */
+      --pink: var(--accent);
+      --pink-2: var(--accent-2);
+      --pink-soft: var(--accent-soft);
+      --peach: var(--secondary);
+      --peach-2: var(--secondary-2);
+      --peach-soft: var(--secondary-soft);
+      --lavender: var(--tertiary);
+      --lavender-2: var(--tertiary-2);
+      --lavender-soft: var(--tertiary-soft);
+    }
 
-  /* 🌊 Cool Blue theme — calm, neutral, not gendered */
-  [data-theme="blue"] {
-    --bg: #EFF4F7;
-    --bg-2: #E0E9EE;
-    --cream: #F8FAFC;
-    --white: #FFFFFF;
+    /* 🌊 Cool Blue theme — calm, neutral, not gendered */
+    [data-theme="blue"] {
+      --bg: #EFF4F7;
+      --bg-2: #E0E9EE;
+      --cream: #F8FAFC;
+      --white: #FFFFFF;
 
-    --ink: #15212B;
-    --ink-2: #3D4F5E;
-    --ink-3: #6B7B89;
-    --ink-4: #A0AEBA;
+      --ink: #15212B;
+      --ink-2: #3D4F5E;
+      --ink-3: #6B7B89;
+      --ink-4: #A0AEBA;
 
-    --accent: #4F8FBF;
-    --accent-2: #2E6A99;
-    --accent-soft: #DDEBF5;
+      --accent: #4F8FBF;
+      --accent-2: #2E6A99;
+      --accent-soft: #DDEBF5;
 
-    --secondary: #6BA8B0;
-    --secondary-2: #4D858C;
-    --secondary-soft: #DCEAEC;
+      --secondary: #6BA8B0;
+      --secondary-2: #4D858C;
+      --secondary-soft: #DCEAEC;
 
-    --tertiary: #8AA3C7;
-    --tertiary-2: #6883AA;
-    --tertiary-soft: #DFE6F1;
+      --tertiary: #8AA3C7;
+      --tertiary-2: #6883AA;
+      --tertiary-soft: #DFE6F1;
 
-    --mint: #88BFAE;
-    --mint-2: #5E9886;
-    --mint-soft: #DEEBE5;
+      --mint: #88BFAE;
+      --mint-2: #5E9886;
+      --mint-soft: #DEEBE5;
 
-    --butter: #C7B98E;
-    --butter-soft: #EFE9D4;
+      --butter: #C7B98E;
+      --butter-soft: #EFE9D4;
 
-    --border: rgba(21, 33, 43, 0.09);
-    --border-strong: rgba(21, 33, 43, 0.16);
-  }
+      --border: rgba(21, 33, 43, 0.09);
+      --border-strong: rgba(21, 33, 43, 0.16);
+    }
 
-  /* 🌈 Pride theme — soft lavender base, rainbow gradients on accents */
-  [data-theme="pride"] {
-    --bg: #F5EFFB;
-    --bg-2: #EBE0F5;
-    --cream: #FBF6FF;
-    --white: #FFFFFF;
+    /* 🌈 Pride theme — soft lavender base, rainbow gradients on accents */
+    [data-theme="pride"] {
+      --bg: #F5EFFB;
+      --bg-2: #EBE0F5;
+      --cream: #FBF6FF;
+      --white: #FFFFFF;
 
-    --ink: #251A2E;
-    --ink-2: #4A3E55;
-    --ink-3: #786A82;
-    --ink-4: #B0A4B8;
+      --ink: #251A2E;
+      --ink-2: #4A3E55;
+      --ink-3: #786A82;
+      --ink-4: #B0A4B8;
 
-    --accent: #B07CD8;
-    --accent-2: #8048B0;
-    --accent-soft: #EDDEF5;
+      --accent: #B07CD8;
+      --accent-2: #8048B0;
+      --accent-soft: #EDDEF5;
 
-    --secondary: #5DBFB5;
-    --secondary-2: #3D9C92;
-    --secondary-soft: #D5EEEB;
+      --secondary: #5DBFB5;
+      --secondary-2: #3D9C92;
+      --secondary-soft: #D5EEEB;
 
-    --tertiary: #F5A66B;
-    --tertiary-2: #D88240;
-    --tertiary-soft: #F9DEC2;
+      --tertiary: #F5A66B;
+      --tertiary-2: #D88240;
+      --tertiary-soft: #F9DEC2;
 
-    --mint: #88CFA0;
-    --mint-2: #5DA178;
-    --mint-soft: #D7EEDD;
+      --mint: #88CFA0;
+      --mint-2: #5DA178;
+      --mint-soft: #D7EEDD;
 
-    --butter: #F5D26B;
-    --butter-soft: #FBEDC2;
+      --butter: #F5D26B;
+      --butter-soft: #FBEDC2;
 
-    --border: rgba(37, 26, 46, 0.09);
-    --border-strong: rgba(37, 26, 46, 0.16);
-  }
+      --border: rgba(37, 26, 46, 0.09);
+      --border-strong: rgba(37, 26, 46, 0.16);
+    }
 
-  /* Pride-specific rainbow gradient on the brand title */
-  [data-theme="pride"] h1.brand em {
-    background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-  [data-theme="pride"] .progress-fill {
-    background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8) !important;
-  }
-  [data-theme="pride"] .action-btn.primary {
-    background: linear-gradient(135deg, #B07CD8, #5DBFB5, #E8923D);
-  }
+    /* Pride-specific rainbow gradient on the brand title */
+    [data-theme="pride"] h1.brand em {
+      background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    [data-theme="pride"] .progress-fill {
+      background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8) !important;
+    }
+    [data-theme="pride"] .action-btn.primary {
+      background: linear-gradient(135deg, #B07CD8, #5DBFB5, #E8923D);
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html, body {
-    background: var(--bg);
-    color: var(--ink);
-    font-family: var(--sans);
-    font-size: 16px;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    min-height: 100vh;
-  }
+    html, body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--sans);
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+    }
 
-  /* Soft pastel blobs in background */
-  body::before, body::after {
-    content: "";
+    /* Soft pastel blobs in background */
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.5;
+    }
+    body::before {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--pink-soft), transparent 60%);
+      top: -100px; left: -100px;
+    }
+    body::after {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, var(--lavender-soft), transparent 60%);
+      bottom: -100px; right: -100px;
+    }
+
+    .app {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 32px 24px 120px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ============================================
+       HEADER
+       ============================================ */
+    .header {
+      text-align: center;
+      padding: 20px 0 36px;
+    }
+    .heart-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      background: var(--white);
+      border: 1px solid var(--border);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--pink-2);
+      margin-bottom: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    }
+    .heart-badge::before { content: "♡"; font-size: 14px; }
+
+    h1.brand {
+      font-family: var(--serif);
+      font-weight: 600;
+      font-size: clamp(44px, 7vw, 72px);
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      font-variation-settings: "opsz" 144, "SOFT" 60;
+    }
+    h1.brand em {
+      font-style: italic;
+      color: var(--pink-2);
+      font-variation-settings: "opsz" 144, "SOFT" 100;
+    }
+    .tagline {
+      font-family: var(--script);
+      font-size: 24px;
+      color: var(--ink-2);
+      margin-top: 10px;
+      line-height: 1.2;
+    }
+    .tagline span { color: var(--peach-2); }
+
+    .intro {
+      margin-top: 18px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--ink-2);
+      max-width: 520px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* ============================================
+       NAME + PROGRESS
+       ============================================ */
+    .me-card {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .me-card .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-3);
+      white-space: nowrap;
+    }
+    .me-card input {
+      flex: 1;
+      min-width: 180px;
+      border: none;
+      outline: none;
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 500;
+      color: var(--ink);
+      background: transparent;
+      padding: 6px 0;
+      border-bottom: 2px dashed var(--pink-soft);
+      transition: border-color 0.2s;
+    }
+    .me-card input:focus {
+      border-bottom-color: var(--pink);
+    }
+    .me-card input::placeholder { color: var(--ink-4); font-style: italic; }
+
+    .progress {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-2);
+    }
+    .progress-bar {
+      width: 100px;
+      height: 6px;
+      background: var(--pink-soft);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--pink), var(--peach));
+      border-radius: 4px;
+      transition: width 0.4s;
+      width: 0%;
+    }
+
+    /* ============================================
+       ME CARD WRAP (now has identity + theme)
+       ============================================ */
+    .me-card-wrap {
+      background: var(--white);
+      border-radius: 22px;
+      padding: 22px 24px;
+      margin-bottom: 28px;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.04);
+    }
+    .me-card-wrap .me-card {
+      background: transparent;
+      border: none;
+      padding: 0;
+      margin: 0 0 20px;
+      box-shadow: none;
+    }
+    .me-card-wrap .me-card + .identity-row {
+      border-top: 1px dashed var(--border);
+      padding-top: 18px;
+    }
+
+    .identity-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-bottom: 18px;
+    }
+    .identity-field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .identity-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-3);
+      letter-spacing: 0.02em;
+    }
+    .identity-label .optional {
+      font-weight: 400;
+      color: var(--ink-4);
+      font-size: 11px;
+    }
+
+    .pronoun-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .pp {
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all 0.18s;
+    }
+    .pp:hover {
+      border-color: var(--accent);
+      color: var(--accent-2);
+    }
+    .pp.active {
+      background: var(--accent-soft);
+      border-color: var(--accent);
+      color: var(--accent-2);
+    }
+    .pp.custom-pp {
+      border-style: dashed;
+      color: var(--ink-3);
+    }
+    .pp.custom-pp.active {
+      border-style: solid;
+    }
+
+    #customPronoun, #customGender {
+      margin-top: 6px;
+      padding: 8px 12px;
+      border: 1.5px solid var(--accent);
+      border-radius: 10px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--ink);
+      outline: none;
+      width: 100%;
+      background: var(--accent-soft);
+    }
+    #customPronoun::placeholder, #customGender::placeholder {
+      color: var(--ink-4);
+      font-style: italic;
+    }
+
+    /* Theme picker */
+    .theme-picker {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border);
+      flex-wrap: wrap;
+    }
+    .theme-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-3);
+      letter-spacing: 0.02em;
+    }
+    .theme-options {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .theme-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px 6px 6px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .theme-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .theme-btn.active {
+      border-color: var(--ink);
+      background: var(--ink);
+      color: var(--white);
+    }
+    .theme-swatch {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      border: 1.5px solid rgba(255,255,255,0.4);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    }
+    .theme-pink {
+      background: linear-gradient(135deg, #FF87A8, #FFB085);
+    }
+    .theme-blue {
+      background: linear-gradient(135deg, #4F8FBF, #6BA8B0);
+    }
+    .theme-pride {
+      background: conic-gradient(from 90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8, #E8526D);
+    }
+
+    @media (max-width: 540px) {
+      .identity-row { grid-template-columns: 1fr; gap: 16px; }
+    }
+
+    /* ============================================
+       CATEGORY TABS
+       ============================================ */
+    .categories {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding: 6px 2px 14px;
+      margin-bottom: 20px;
+      scrollbar-width: thin;
+    }
+    .categories::-webkit-scrollbar { height: 4px; }
+    .categories::-webkit-scrollbar-thumb { background: var(--pink-soft); border-radius: 2px; }
+
+    .cat-btn {
+      flex-shrink: 0;
+      padding: 9px 16px;
+      border-radius: 999px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink-2);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .cat-btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.06);
+    }
+    .cat-btn.active {
+      background: var(--ink);
+      color: var(--white);
+      border-color: var(--ink);
+    }
+    .cat-btn.suggested:not(.active) {
+      border-color: var(--accent);
+      background: var(--accent-soft);
+      color: var(--accent-2);
+    }
+    .cat-btn .star {
+      font-size: 11px;
+      margin-left: 2px;
+      vertical-align: 1px;
+    }
+    .cat-btn .count {
+      font-size: 11px;
+      opacity: 0.7;
+      font-weight: 500;
+    }
+
+    /* ============================================
+       QUESTION CARD
+       ============================================ */
+    .question {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 20px 22px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .question.answered {
+      background: linear-gradient(to right, var(--mint-soft) 0%, var(--white) 15%);
+    }
+    .question.custom {
+      background: linear-gradient(to right, var(--lavender-soft) 0%, var(--white) 15%);
+    }
+
+    .q-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .q-text {
+      font-family: var(--serif);
+      font-size: 18px;
+      font-weight: 500;
+      color: var(--ink);
+      line-height: 1.35;
+      letter-spacing: -0.01em;
+      font-variation-settings: "opsz" 40, "SOFT" 50;
+      flex: 1;
+    }
+    .q-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--pink-2);
+      background: var(--pink-soft);
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      margin-top: 4px;
+    }
+    .q-badge.custom { color: var(--lavender-2); background: var(--lavender-soft); }
+    .q-badge.answered { color: var(--mint-2); background: var(--mint-soft); }
+
+    .q-delete {
+      background: none;
+      border: none;
+      color: var(--ink-4);
+      cursor: pointer;
+      font-size: 14px;
+      padding: 4px;
+      line-height: 1;
+      border-radius: 6px;
+      transition: all 0.2s;
+    }
+    .q-delete:hover {
+      color: var(--pink-2);
+      background: var(--pink-soft);
+    }
+
+    .q-answer {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.55;
+      color: var(--ink);
+      background: transparent;
+      resize: none;
+      padding: 8px 0 0;
+      min-height: 28px;
+      font-family: var(--sans);
+    }
+    .q-answer::placeholder {
+      color: var(--ink-4);
+      font-style: italic;
+    }
+
+    .q-skip {
+      margin-top: 6px;
+      font-size: 12px;
+      color: var(--ink-3);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 4px 0;
+      font-weight: 500;
+      text-decoration: underline;
+      text-decoration-color: var(--ink-4);
+      text-underline-offset: 3px;
+    }
+    .q-skip:hover { color: var(--pink-2); }
+    .q-skip.skipped {
+      color: var(--peach-2);
+      font-style: italic;
+    }
+
+    /* ============================================
+       ADD CUSTOM QUESTION
+       ============================================ */
+    .add-custom {
+      background: var(--white);
+      border: 2px dashed var(--lavender);
+      border-radius: 20px;
+      padding: 18px 22px;
+      margin: 20px 0;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-align: center;
+    }
+    .add-custom:hover {
+      background: var(--lavender-soft);
+      transform: translateY(-1px);
+    }
+    .add-custom .plus {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--lavender);
+      color: white;
+      font-size: 18px;
+      font-weight: 700;
+      margin-right: 10px;
+      vertical-align: -8px;
+    }
+    .add-custom .text {
+      font-family: var(--serif);
+      font-size: 17px;
+      font-weight: 500;
+      color: var(--lavender-2);
+    }
+    .add-custom .sub {
+      display: block;
+      margin-top: 4px;
+      font-size: 12px;
+      color: var(--ink-3);
+      font-family: var(--sans);
+    }
+
+    .add-form {
+      background: var(--white);
+      border: 2px solid var(--lavender);
+      border-radius: 20px;
+      padding: 18px;
+      margin: 20px 0;
+    }
+    .add-form input {
+      width: 100%;
+      border: none;
+      outline: none;
+      font-family: var(--serif);
+      font-size: 18px;
+      padding: 8px 0;
+      border-bottom: 2px dashed var(--lavender);
+      color: var(--ink);
+      background: transparent;
+    }
+    .add-form input::placeholder { color: var(--ink-4); font-style: italic; }
+    .add-form .actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+      justify-content: flex-end;
+    }
+    .add-form button {
+      padding: 8px 16px;
+      border-radius: 10px;
+      border: none;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .add-form button.cancel {
+      background: transparent;
+      color: var(--ink-3);
+    }
+    .add-form button.save {
+      background: var(--lavender);
+      color: white;
+    }
+    .add-form button.save:hover {
+      background: var(--lavender-2);
+    }
+
+    /* ============================================
+       DOWNLOAD BAR (sticky bottom)
+       ============================================ */
+    .action-bar {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 10px;
+      background: var(--white);
+      border-radius: 999px;
+      padding: 8px;
+      box-shadow: 0 10px 40px -10px rgba(43, 29, 26, 0.25),
+                  0 4px 12px -4px rgba(43, 29, 26, 0.1);
+      border: 1px solid var(--border);
+      z-index: 50;
+      max-width: calc(100% - 32px);
+    }
+    .action-btn {
+      padding: 12px 20px;
+      border-radius: 999px;
+      border: none;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.2s;
+      white-space: nowrap;
+    }
+    .action-btn.primary {
+      background: linear-gradient(135deg, var(--pink), var(--pink-2));
+      color: white;
+      box-shadow: 0 4px 12px rgba(232, 82, 138, 0.35);
+    }
+    .action-btn.primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 18px rgba(232, 82, 138, 0.45);
+    }
+    .action-btn.secondary {
+      background: transparent;
+      color: var(--ink-2);
+    }
+    .action-btn.secondary:hover {
+      background: var(--bg-2);
+      color: var(--ink);
+    }
+
+    /* ============================================
+       TOAST
+       ============================================ */
+    .toast {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translate(-50%, -100px);
+      background: var(--ink);
+      color: white;
+      padding: 12px 22px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 600;
+      z-index: 100;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      opacity: 0;
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translate(-50%, 0);
+      opacity: 1;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    .footer {
+      text-align: center;
+      padding: 40px 20px 20px;
+      font-size: 13px;
+      color: var(--ink-3);
+      font-family: var(--sans);
+    }
+    .footer em {
+      font-family: var(--script);
+      font-size: 18px;
+      color: var(--pink-2);
+      font-style: normal;
+      vertical-align: -1px;
+    }
+
+    /* Reset confirmation */
+    .reset-btn {
+      display: block;
+      margin: 20px auto 0;
+      padding: 8px 16px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--ink-3);
+      font-size: 12px;
+      cursor: pointer;
+      font-family: var(--sans);
+      font-weight: 500;
+    }
+    .reset-btn:hover {
+      color: var(--pink-2);
+      border-color: var(--pink);
+    }
+
+    /* Empty state for filtered category */
+    .empty {
+      text-align: center;
+      padding: 40px 20px;
+      color: var(--ink-3);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 17px;
+    }
+
+    @media print {
+      body::before, body::after { display: none; }
+      body { background: white; }
+      .header { padding: 10px 0 30px; }
+      .header .heart-badge, .header .intro, .header .tagline { display: none; }
+      h1.brand { font-size: 40px; }
+      h1.brand::after {
+        content: "";
+        display: block;
+        width: 60px; height: 2px;
+        background: var(--pink);
+        margin: 12px auto 0;
+      }
+      .me-card { border: none; box-shadow: none; padding: 0; margin-bottom: 30px; }
+      .me-card input { border-bottom: none; pointer-events: none; font-size: 28px; text-align: center; }
+      .me-card .label { display: none; }
+      .progress, .categories, .add-custom, .add-form, .reset-btn,
+      .action-bar, .footer, .q-skip, .q-delete, .q-badge { display: none !important; }
+
+      .question {
+        background: none !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 10px 0;
+        margin-bottom: 18px;
+        page-break-inside: avoid;
+        border-bottom: 1px dashed var(--border) !important;
+      }
+      .q-text {
+        font-style: italic;
+        color: var(--pink-2) !important;
+        font-size: 14px;
+        margin-bottom: 6px;
+      }
+      .q-answer {
+        font-size: 14px !important;
+        color: var(--ink) !important;
+        background: transparent !important;
+      }
+      .q-answer:empty::before,
+      .q-answer[value=""]::before {
+        content: "—";
+        color: var(--ink-4);
+      }
+      .question:not(.answered) { display: none !important; }
+    }
+
+    /* ============================================
+       AD SLOTS
+       ============================================ */
+    .ad-slot {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 16px 18px;
+      margin: 20px 0;
+      border: 1px solid var(--border);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      position: relative;
+      overflow: hidden;
+    }
+    .ad-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--ink-4);
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      margin-bottom: 10px;
+    }
+    .ad-label .tag-left {
+      color: var(--ink-4);
+    }
+    .ad-label .tag-right {
+      font-size: 9px;
+      padding: 2px 8px;
+      background: var(--bg-2);
+      border-radius: 999px;
+      color: var(--ink-3);
+      letter-spacing: 0.1em;
+    }
+    .ad-content {
+      min-height: 90px;
+      background: linear-gradient(135deg, var(--peach-soft), var(--pink-soft));
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      border: 1px dashed rgba(232, 82, 138, 0.3);
+    }
+    .ad-placeholder-icon {
+      width: 54px; height: 54px;
+      border-radius: 14px;
+      background: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      flex-shrink: 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+    }
+    .ad-placeholder-text {
+      flex: 1;
+    }
+    .ad-placeholder-title {
+      font-family: var(--serif);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 3px;
+    }
+    .ad-placeholder-desc {
+      font-size: 12px;
+      color: var(--ink-2);
+      line-height: 1.4;
+    }
+    .ad-placeholder-cta {
+      padding: 8px 14px;
+      background: var(--ink);
+      color: white;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 600;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+    .ad-slot.leaderboard .ad-content {
+      background: linear-gradient(135deg, var(--lavender-soft), var(--mint-soft));
+    }
+
+    /* Hide ads when printing */
+    @media print {
+      .ad-slot { display: none !important; }
+    }
+
+    @media (max-width: 540px) {
+      .ad-placeholder-icon { width: 44px; height: 44px; font-size: 22px; }
+      .ad-placeholder-title { font-size: 14px; }
+      .ad-placeholder-desc { font-size: 11px; }
+      .ad-placeholder-cta { padding: 6px 10px; font-size: 10px; }
+    }
+
+    @media (max-width: 540px) {
+      .me-card { padding: 16px 18px; }
+      .me-card .label { display: none; }
+      .action-btn { padding: 10px 16px; font-size: 13px; }
+      .action-btn .full-label { display: none; }
+      h1.brand { font-size: 42px; }
+    }
+  /* ============================================================
+     PREVIEW — full-screen answer sheet
+     ============================================================ */
+  .preview-overlay {
     position: fixed;
-    border-radius: 50%;
-    filter: blur(80px);
-    pointer-events: none;
-    z-index: 0;
-    opacity: 0.5;
+    inset: 0;
+    z-index: 200;
+    display: none;
+    overflow-y: auto;
+    background: var(--bg);
+    -webkit-overflow-scrolling: touch;
   }
-  body::before {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, var(--pink-soft), transparent 60%);
-    top: -100px; left: -100px;
+  .preview-overlay.open {
+    display: block;
+    animation: preview-fade 0.25s ease;
   }
-  body::after {
-    width: 500px; height: 500px;
-    background: radial-gradient(circle, var(--lavender-soft), transparent 60%);
-    bottom: -100px; right: -100px;
+  @keyframes preview-fade {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .preview-modal {
+    position: relative;
+    min-height: 100vh;
+    width: 100%;
+    background: var(--bg);
   }
 
-  .app {
-    max-width: 820px;
+  .preview-close {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--white);
+    color: var(--ink-2);
+    font-size: 17px;
+    cursor: pointer;
+    z-index: 220;
+    box-shadow: 0 4px 14px rgba(43, 29, 26, 0.12);
+    transition: all 0.2s ease;
+  }
+  .preview-close:hover {
+    background: var(--ink);
+    color: var(--white);
+    transform: rotate(90deg) scale(1.05);
+  }
+
+  /* HERO */
+  .preview-hero {
+    position: relative;
+    padding: 80px 24px 56px;
+    background: linear-gradient(135deg, var(--pink-soft), var(--peach-soft) 60%, var(--lavender-soft));
+    overflow: hidden;
+  }
+  .preview-hero::before,
+  .preview-hero::after {
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+  .preview-hero::before {
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, var(--pink), transparent 70%);
+    top: -120px; left: -80px;
+  }
+  .preview-hero::after {
+    width: 320px; height: 320px;
+    background: radial-gradient(circle, var(--lavender), transparent 70%);
+    bottom: -120px; right: -80px;
+  }
+  [data-theme="pride"] .preview-hero {
+    background: linear-gradient(135deg, var(--lavender-soft), var(--mint-soft) 50%, var(--peach-soft));
+  }
+  [data-theme="pride"] .preview-hero-rainbow {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
+    z-index: 2;
+  }
+  .preview-hero-rainbow { display: none; }
+  [data-theme="pride"] .preview-hero-rainbow { display: block; }
+
+  .preview-hero-inner {
+    max-width: 720px;
     margin: 0 auto;
-    padding: 32px 24px 120px;
+    text-align: center;
     position: relative;
     z-index: 1;
   }
 
-  /* ============================================
-     HEADER
-     ============================================ */
-  .header {
-    text-align: center;
-    padding: 20px 0 36px;
-  }
-  .heart-badge {
-    display: inline-flex;
+  .preview-hero-heart {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 18px;
+    display: flex;
     align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    border-radius: 999px;
+    justify-content: center;
     background: var(--white);
-    border: 1px solid var(--border);
-    font-size: 12px;
-    font-weight: 600;
+    border-radius: 50%;
+    box-shadow: 0 6px 20px rgba(232, 82, 138, 0.22);
+  }
+  .preview-hero-heart svg {
+    width: 32px;
+    height: 32px;
     color: var(--pink-2);
-    margin-bottom: 22px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+    fill: currentColor;
   }
-  .heart-badge::before { content: "♡"; font-size: 14px; }
+  [data-theme="pride"] .preview-hero-heart svg {
+    color: var(--lavender-2);
+  }
 
-  h1.brand {
-    font-family: var(--serif);
-    font-weight: 600;
-    font-size: clamp(44px, 7vw, 72px);
-    line-height: 0.95;
-    letter-spacing: -0.03em;
-    color: var(--ink);
-    font-variation-settings: "opsz" 144, "SOFT" 60;
+  .preview-eyebrow {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--pink-2);
+    margin-bottom: 16px;
   }
-  h1.brand em {
+  .preview-name {
+    font-family: var(--serif);
+    font-size: clamp(40px, 7vw, 64px);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.0;
+    color: var(--ink);
+    margin: 0 0 14px;
+    font-variation-settings: "opsz" 144, "SOFT" 80;
+  }
+  .preview-name em {
     font-style: italic;
     color: var(--pink-2);
     font-variation-settings: "opsz" 144, "SOFT" 100;
   }
-  .tagline {
-    font-family: var(--script);
-    font-size: 24px;
-    color: var(--ink-2);
-    margin-top: 10px;
-    line-height: 1.2;
+  [data-theme="pride"] .preview-name em {
+    background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
-  .tagline span { color: var(--peach-2); }
-
-  .intro {
-    margin-top: 18px;
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--ink-2);
-    max-width: 520px;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  /* ============================================
-     NAME + PROGRESS
-     ============================================ */
-  .me-card {
-    background: var(--white);
-    border-radius: 22px;
-    padding: 22px 24px;
-    margin-bottom: 28px;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    flex-wrap: wrap;
-  }
-  .me-card .label {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink-3);
-    white-space: nowrap;
-  }
-  .me-card input {
-    flex: 1;
-    min-width: 180px;
-    border: none;
-    outline: none;
-    font-family: var(--serif);
-    font-size: 22px;
-    font-weight: 500;
-    color: var(--ink);
-    background: transparent;
-    padding: 6px 0;
-    border-bottom: 2px dashed var(--pink-soft);
-    transition: border-color 0.2s;
-  }
-  .me-card input:focus {
-    border-bottom-color: var(--pink);
-  }
-  .me-card input::placeholder { color: var(--ink-4); font-style: italic; }
-
-  .progress {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink-2);
-  }
-  .progress-bar {
-    width: 100px;
-    height: 6px;
-    background: var(--pink-soft);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--pink), var(--peach));
-    border-radius: 4px;
-    transition: width 0.4s;
-    width: 0%;
-  }
-
-  /* ============================================
-     ME CARD WRAP (now has identity + theme)
-     ============================================ */
-  .me-card-wrap {
-    background: var(--white);
-    border-radius: 22px;
-    padding: 22px 24px;
-    margin-bottom: 28px;
-    border: 1px solid var(--border);
-    box-shadow: 0 4px 16px rgba(0,0,0,0.04);
-  }
-  .me-card-wrap .me-card {
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0 0 20px;
-    box-shadow: none;
-  }
-  .me-card-wrap .me-card + .identity-row {
-    border-top: 1px dashed var(--border);
-    padding-top: 18px;
-  }
-
-  .identity-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
-    margin-bottom: 18px;
-  }
-  .identity-field {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-  .identity-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink-3);
-    letter-spacing: 0.02em;
-  }
-  .identity-label .optional {
-    font-weight: 400;
-    color: var(--ink-4);
-    font-size: 11px;
-  }
-
-  .pronoun-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-  }
-  .pp {
-    padding: 6px 12px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--white);
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: all 0.18s;
-  }
-  .pp:hover {
-    border-color: var(--accent);
-    color: var(--accent-2);
-  }
-  .pp.active {
-    background: var(--accent-soft);
-    border-color: var(--accent);
-    color: var(--accent-2);
-  }
-  .pp.custom-pp {
-    border-style: dashed;
-    color: var(--ink-3);
-  }
-  .pp.custom-pp.active {
-    border-style: solid;
-  }
-
-  #customPronoun, #customGender {
-    margin-top: 6px;
-    padding: 8px 12px;
-    border: 1.5px solid var(--accent);
-    border-radius: 10px;
-    font-family: var(--sans);
-    font-size: 13px;
-    color: var(--ink);
-    outline: none;
-    width: 100%;
-    background: var(--accent-soft);
-  }
-  #customPronoun::placeholder, #customGender::placeholder {
-    color: var(--ink-4);
-    font-style: italic;
-  }
-
-  /* Theme picker */
-  .theme-picker {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding-top: 14px;
-    border-top: 1px dashed var(--border);
-    flex-wrap: wrap;
-  }
-  .theme-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink-3);
-    letter-spacing: 0.02em;
-  }
-  .theme-options {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .theme-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 12px 6px 6px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--white);
-    font-family: var(--sans);
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .theme-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  }
-  .theme-btn.active {
-    border-color: var(--ink);
-    background: var(--ink);
-    color: var(--white);
-  }
-  .theme-swatch {
-    width: 18px; height: 18px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    border: 1.5px solid rgba(255,255,255,0.4);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
-  }
-  .theme-pink {
-    background: linear-gradient(135deg, #FF87A8, #FFB085);
-  }
-  .theme-blue {
-    background: linear-gradient(135deg, #4F8FBF, #6BA8B0);
-  }
-  .theme-pride {
-    background: conic-gradient(from 90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8, #E8526D);
-  }
-
-  @media (max-width: 540px) {
-    .identity-row { grid-template-columns: 1fr; gap: 16px; }
-  }
-
-  /* ============================================
-     CATEGORY TABS
-     ============================================ */
-  .categories {
-    display: flex;
-    gap: 8px;
-    overflow-x: auto;
-    padding: 6px 2px 14px;
-    margin-bottom: 20px;
-    scrollbar-width: thin;
-  }
-  .categories::-webkit-scrollbar { height: 4px; }
-  .categories::-webkit-scrollbar-thumb { background: var(--pink-soft); border-radius: 2px; }
-
-  .cat-btn {
-    flex-shrink: 0;
-    padding: 9px 16px;
-    border-radius: 999px;
-    border: 1.5px solid var(--border);
-    background: var(--white);
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--ink-2);
-    cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .cat-btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 10px rgba(0,0,0,0.06);
-  }
-  .cat-btn.active {
-    background: var(--ink);
-    color: var(--white);
-    border-color: var(--ink);
-  }
-  .cat-btn.suggested:not(.active) {
-    border-color: var(--accent);
-    background: var(--accent-soft);
-    color: var(--accent-2);
-  }
-  .cat-btn .star {
-    font-size: 11px;
-    margin-left: 2px;
-    vertical-align: 1px;
-  }
-  .cat-btn .count {
-    font-size: 11px;
-    opacity: 0.7;
-    font-weight: 500;
-  }
-
-  /* ============================================
-     QUESTION CARD
-     ============================================ */
-  .question {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 20px 22px;
-    margin-bottom: 12px;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    transition: transform 0.15s, box-shadow 0.15s;
-  }
-  .question.answered {
-    background: linear-gradient(to right, var(--mint-soft) 0%, var(--white) 15%);
-  }
-  .question.custom {
-    background: linear-gradient(to right, var(--lavender-soft) 0%, var(--white) 15%);
-  }
-
-  .q-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
-    margin-bottom: 10px;
-  }
-  .q-text {
-    font-family: var(--serif);
-    font-size: 18px;
-    font-weight: 500;
-    color: var(--ink);
-    line-height: 1.35;
-    letter-spacing: -0.01em;
-    font-variation-settings: "opsz" 40, "SOFT" 50;
-    flex: 1;
-  }
-  .q-badge {
-    font-size: 10px;
-    font-weight: 700;
-    color: var(--pink-2);
-    background: var(--pink-soft);
-    padding: 3px 8px;
-    border-radius: 6px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    white-space: nowrap;
-    margin-top: 4px;
-  }
-  .q-badge.custom { color: var(--lavender-2); background: var(--lavender-soft); }
-  .q-badge.answered { color: var(--mint-2); background: var(--mint-soft); }
-
-  .q-delete {
-    background: none;
-    border: none;
-    color: var(--ink-4);
-    cursor: pointer;
+  .preview-id-line {
     font-size: 14px;
-    padding: 4px;
-    line-height: 1;
-    border-radius: 6px;
-    transition: all 0.2s;
-  }
-  .q-delete:hover {
-    color: var(--pink-2);
-    background: var(--pink-soft);
-  }
-
-  .q-answer {
-    width: 100%;
-    border: none;
-    outline: none;
+    color: var(--ink-2);
     font-family: var(--sans);
-    font-size: 15px;
-    line-height: 1.55;
-    color: var(--ink);
-    background: transparent;
-    resize: none;
-    padding: 8px 0 0;
-    min-height: 28px;
-    font-family: var(--sans);
-  }
-  .q-answer::placeholder {
-    color: var(--ink-4);
-    font-style: italic;
-  }
-
-  .q-skip {
-    margin-top: 6px;
-    font-size: 12px;
-    color: var(--ink-3);
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 4px 0;
     font-weight: 500;
-    text-decoration: underline;
-    text-decoration-color: var(--ink-4);
-    text-underline-offset: 3px;
+    margin-bottom: 16px;
   }
-  .q-skip:hover { color: var(--pink-2); }
-  .q-skip.skipped {
+  .preview-tagline {
+    font-family: var(--script);
+    font-size: 22px;
     color: var(--peach-2);
-    font-style: italic;
+    margin-top: 6px;
   }
 
-  /* ============================================
-     ADD CUSTOM QUESTION
-     ============================================ */
-  .add-custom {
+  /* ACTION BAR */
+  .preview-actions {
     background: var(--white);
-    border: 2px dashed var(--lavender);
-    border-radius: 20px;
-    padding: 18px 22px;
-    margin: 20px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 16px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgba(255, 255, 255, 0.94);
+  }
+  .preview-actions-inner {
+    max-width: 720px;
+    margin: 0 auto;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .preview-action-btn {
+    flex: 1;
+    min-width: 130px;
+    padding: 12px 18px;
+    border-radius: 12px;
+    border: 1.5px solid var(--border);
+    background: var(--white);
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-2);
     cursor: pointer;
-    transition: all 0.2s;
-    text-align: center;
-  }
-  .add-custom:hover {
-    background: var(--lavender-soft);
-    transform: translateY(-1px);
-  }
-  .add-custom .plus {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--lavender);
-    color: white;
-    font-size: 18px;
-    font-weight: 700;
-    margin-right: 10px;
-    vertical-align: -8px;
-  }
-  .add-custom .text {
-    font-family: var(--serif);
-    font-size: 17px;
-    font-weight: 500;
-    color: var(--lavender-2);
-  }
-  .add-custom .sub {
-    display: block;
-    margin-top: 4px;
-    font-size: 12px;
-    color: var(--ink-3);
-    font-family: var(--sans);
-  }
-
-  .add-form {
-    background: var(--white);
-    border: 2px solid var(--lavender);
-    border-radius: 20px;
-    padding: 18px;
-    margin: 20px 0;
-  }
-  .add-form input {
-    width: 100%;
-    border: none;
-    outline: none;
-    font-family: var(--serif);
-    font-size: 18px;
-    padding: 8px 0;
-    border-bottom: 2px dashed var(--lavender);
-    color: var(--ink);
-    background: transparent;
-  }
-  .add-form input::placeholder { color: var(--ink-4); font-style: italic; }
-  .add-form .actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 12px;
-    justify-content: flex-end;
-  }
-  .add-form button {
-    padding: 8px 16px;
-    border-radius: 10px;
-    border: none;
-    font-family: var(--sans);
-    font-size: 13px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .add-form button.cancel {
-    background: transparent;
-    color: var(--ink-3);
-  }
-  .add-form button.save {
-    background: var(--lavender);
-    color: white;
-  }
-  .add-form button.save:hover {
-    background: var(--lavender-2);
-  }
-
-  /* ============================================
-     DOWNLOAD BAR (sticky bottom)
-     ============================================ */
-  .action-bar {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 10px;
-    background: var(--white);
-    border-radius: 999px;
-    padding: 8px;
-    box-shadow: 0 10px 40px -10px rgba(43, 29, 26, 0.25),
-                0 4px 12px -4px rgba(43, 29, 26, 0.1);
-    border: 1px solid var(--border);
-    z-index: 50;
-    max-width: calc(100% - 32px);
-  }
-  .action-btn {
-    padding: 12px 20px;
-    border-radius: 999px;
-    border: none;
-    font-family: var(--sans);
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
     gap: 8px;
     transition: all 0.2s;
     white-space: nowrap;
   }
-  .action-btn.primary {
+  .preview-action-btn:hover {
+    border-color: var(--pink);
+    color: var(--pink-2);
+    transform: translateY(-1px);
+  }
+  .preview-action-btn.primary {
     background: linear-gradient(135deg, var(--pink), var(--pink-2));
     color: white;
-    box-shadow: 0 4px 12px rgba(232, 82, 138, 0.35);
+    border-color: transparent;
+    box-shadow: 0 4px 14px rgba(232, 82, 138, 0.32);
   }
-  .action-btn.primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 18px rgba(232, 82, 138, 0.45);
-  }
-  .action-btn.secondary {
-    background: transparent;
-    color: var(--ink-2);
-  }
-  .action-btn.secondary:hover {
-    background: var(--bg-2);
-    color: var(--ink);
-  }
-
-  /* ============================================
-     TOAST
-     ============================================ */
-  .toast {
-    position: fixed;
-    top: 24px;
-    left: 50%;
-    transform: translate(-50%, -100px);
-    background: var(--ink);
+  .preview-action-btn.primary:hover {
     color: white;
-    padding: 12px 22px;
-    border-radius: 999px;
-    font-size: 13px;
-    font-weight: 600;
-    z-index: 100;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
-    opacity: 0;
-    transition: all 0.3s ease;
-    pointer-events: none;
+    box-shadow: 0 6px 20px rgba(232, 82, 138, 0.42);
   }
-  .toast.show {
-    transform: translate(-50%, 0);
-    opacity: 1;
+  [data-theme="pride"] .preview-action-btn.primary {
+    background: linear-gradient(135deg, #B07CD8, #5DBFB5, #E8923D);
   }
 
-  /* ============================================
-     FOOTER
-     ============================================ */
-  .footer {
+  /* CONTENT */
+  .preview-content {
+    padding: 56px 24px 40px;
+  }
+  .preview-content-inner {
+    max-width: 720px;
+    margin: 0 auto;
+  }
+
+  .preview-cat {
+    margin-bottom: 44px;
+  }
+  .preview-cat-label {
+    font-family: var(--serif);
+    font-style: italic;
+    font-weight: 600;
+    font-size: 28px;
+    color: var(--pink-2);
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    font-variation-settings: "opsz" 60, "SOFT" 100;
+  }
+  [data-theme="pride"] .preview-cat-label {
+    color: var(--lavender-2);
+  }
+  .preview-cat-rule {
+    width: 70px;
+    height: 2px;
+    background: var(--peach);
+    margin: 0 0 24px;
+    border-radius: 2px;
+    opacity: 0.7;
+  }
+
+  .preview-qa {
+    margin-bottom: 22px;
+    padding-bottom: 20px;
+    border-bottom: 1px dashed var(--border);
+  }
+  .preview-qa:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+  .preview-q {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 16px;
+    color: var(--ink-2);
+    line-height: 1.4;
+    margin: 0 0 8px;
+    font-variation-settings: "opsz" 24, "SOFT" 70;
+  }
+  .preview-a {
+    font-family: var(--sans);
+    font-size: 16px;
+    color: var(--ink);
+    line-height: 1.6;
+    white-space: pre-wrap;
+    margin: 0;
+  }
+
+  .preview-empty {
     text-align: center;
-    padding: 40px 20px 20px;
+    padding: 80px 20px;
+    color: var(--ink-3);
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+  }
+
+  /* FOOTER */
+  .preview-footer {
+    text-align: center;
+    padding: 30px 20px 60px;
     font-size: 13px;
     color: var(--ink-3);
     font-family: var(--sans);
+    border-top: 1px dashed var(--border);
+    margin: 0 24px;
   }
-  .footer em {
+  .preview-footer em {
     font-family: var(--script);
     font-size: 18px;
     color: var(--pink-2);
@@ -824,510 +1314,20 @@
     vertical-align: -1px;
   }
 
-  /* Reset confirmation */
-  .reset-btn {
-    display: block;
-    margin: 20px auto 0;
-    padding: 8px 16px;
-    background: none;
-    border: 1px solid var(--border);
-    border-radius: 999px;
-    color: var(--ink-3);
-    font-size: 12px;
-    cursor: pointer;
-    font-family: var(--sans);
-    font-weight: 500;
-  }
-  .reset-btn:hover {
-    color: var(--pink-2);
-    border-color: var(--pink);
-  }
-
-  /* Empty state for filtered category */
-  .empty {
-    text-align: center;
-    padding: 40px 20px;
-    color: var(--ink-3);
-    font-family: var(--serif);
-    font-style: italic;
-    font-size: 17px;
-  }
-
-  @media print {
-    body::before, body::after { display: none; }
-    body { background: white; }
-    .header { padding: 10px 0 30px; }
-    .header .heart-badge, .header .intro, .header .tagline { display: none; }
-    h1.brand { font-size: 40px; }
-    h1.brand::after {
-      content: "";
-      display: block;
-      width: 60px; height: 2px;
-      background: var(--pink);
-      margin: 12px auto 0;
-    }
-    .me-card { border: none; box-shadow: none; padding: 0; margin-bottom: 30px; }
-    .me-card input { border-bottom: none; pointer-events: none; font-size: 28px; text-align: center; }
-    .me-card .label { display: none; }
-    .progress, .categories, .add-custom, .add-form, .reset-btn,
-    .action-bar, .footer, .q-skip, .q-delete, .q-badge { display: none !important; }
-
-    .question {
-      background: none !important;
-      border: none !important;
-      box-shadow: none !important;
-      padding: 10px 0;
-      margin-bottom: 18px;
-      page-break-inside: avoid;
-      border-bottom: 1px dashed var(--border) !important;
-    }
-    .q-text {
-      font-style: italic;
-      color: var(--pink-2) !important;
-      font-size: 14px;
-      margin-bottom: 6px;
-    }
-    .q-answer {
-      font-size: 14px !important;
-      color: var(--ink) !important;
-      background: transparent !important;
-    }
-    .q-answer:empty::before,
-    .q-answer[value=""]::before {
-      content: "—";
-      color: var(--ink-4);
-    }
-    .question:not(.answered) { display: none !important; }
-  }
-
-  /* ============================================
-     AD SLOTS
-     ============================================ */
-  .ad-slot {
-    background: var(--white);
-    border-radius: 20px;
-    padding: 16px 18px;
-    margin: 20px 0;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-    position: relative;
-    overflow: hidden;
-  }
-  .ad-label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    font-size: 10px;
-    font-weight: 600;
-    color: var(--ink-4);
-    text-transform: uppercase;
-    letter-spacing: 0.14em;
-    margin-bottom: 10px;
-  }
-  .ad-label .tag-left {
-    color: var(--ink-4);
-  }
-  .ad-label .tag-right {
-    font-size: 9px;
-    padding: 2px 8px;
-    background: var(--bg-2);
-    border-radius: 999px;
-    color: var(--ink-3);
-    letter-spacing: 0.1em;
-  }
-  .ad-content {
-    min-height: 90px;
-    background: linear-gradient(135deg, var(--peach-soft), var(--pink-soft));
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    padding: 14px 16px;
-    border: 1px dashed rgba(232, 82, 138, 0.3);
-  }
-  .ad-placeholder-icon {
-    width: 54px; height: 54px;
-    border-radius: 14px;
-    background: var(--white);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    flex-shrink: 0;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.06);
-  }
-  .ad-placeholder-text {
-    flex: 1;
-  }
-  .ad-placeholder-title {
-    font-family: var(--serif);
-    font-size: 16px;
-    font-weight: 600;
-    color: var(--ink);
-    line-height: 1.2;
-    margin-bottom: 3px;
-  }
-  .ad-placeholder-desc {
-    font-size: 12px;
-    color: var(--ink-2);
-    line-height: 1.4;
-  }
-  .ad-placeholder-cta {
-    padding: 8px 14px;
-    background: var(--ink);
-    color: white;
-    border-radius: 999px;
-    font-size: 11px;
-    font-weight: 600;
-    white-space: nowrap;
-    cursor: pointer;
-  }
-  .ad-slot.leaderboard .ad-content {
-    background: linear-gradient(135deg, var(--lavender-soft), var(--mint-soft));
-  }
-
-  /* Hide ads when printing */
-  @media print {
-    .ad-slot { display: none !important; }
-  }
-
   @media (max-width: 540px) {
-    .ad-placeholder-icon { width: 44px; height: 44px; font-size: 22px; }
-    .ad-placeholder-title { font-size: 14px; }
-    .ad-placeholder-desc { font-size: 11px; }
-    .ad-placeholder-cta { padding: 6px 10px; font-size: 10px; }
+    .preview-close { width: 36px; height: 36px; top: 12px; right: 12px; font-size: 14px; }
+    .preview-hero { padding: 60px 18px 40px; }
+    .preview-hero-heart { width: 54px; height: 54px; margin-bottom: 14px; }
+    .preview-hero-heart svg { width: 26px; height: 26px; }
+    .preview-actions { padding: 12px 16px; }
+    .preview-action-btn { font-size: 12px; padding: 10px 8px; min-width: 0; }
+    .preview-content { padding: 36px 18px 30px; }
+    .preview-cat { margin-bottom: 36px; }
+    .preview-cat-label { font-size: 24px; }
+    .preview-tagline { font-size: 19px; }
   }
 
-  @media (max-width: 540px) {
-    .me-card { padding: 16px 18px; }
-    .me-card .label { display: none; }
-    .action-btn { padding: 10px 16px; font-size: 13px; }
-    .action-btn .full-label { display: none; }
-    h1.brand { font-size: 42px; }
-  }
-/* ============================================================
-   PREVIEW — full-screen answer sheet
-   ============================================================ */
-.preview-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 200;
-  display: none;
-  overflow-y: auto;
-  background: var(--bg);
-  -webkit-overflow-scrolling: touch;
-}
-.preview-overlay.open {
-  display: block;
-  animation: preview-fade 0.25s ease;
-}
-@keyframes preview-fade {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-.preview-modal {
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-  background: var(--bg);
-}
-
-.preview-close {
-  position: fixed;
-  top: 18px;
-  right: 18px;
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  border: 1px solid var(--border);
-  background: var(--white);
-  color: var(--ink-2);
-  font-size: 17px;
-  cursor: pointer;
-  z-index: 220;
-  box-shadow: 0 4px 14px rgba(43, 29, 26, 0.12);
-  transition: all 0.2s ease;
-}
-.preview-close:hover {
-  background: var(--ink);
-  color: var(--white);
-  transform: rotate(90deg) scale(1.05);
-}
-
-/* HERO */
-.preview-hero {
-  position: relative;
-  padding: 80px 24px 56px;
-  background: linear-gradient(135deg, var(--pink-soft), var(--peach-soft) 60%, var(--lavender-soft));
-  overflow: hidden;
-}
-.preview-hero::before,
-.preview-hero::after {
-  content: "";
-  position: absolute;
-  border-radius: 50%;
-  filter: blur(60px);
-  opacity: 0.55;
-  pointer-events: none;
-}
-.preview-hero::before {
-  width: 320px; height: 320px;
-  background: radial-gradient(circle, var(--pink), transparent 70%);
-  top: -120px; left: -80px;
-}
-.preview-hero::after {
-  width: 320px; height: 320px;
-  background: radial-gradient(circle, var(--lavender), transparent 70%);
-  bottom: -120px; right: -80px;
-}
-[data-theme="pride"] .preview-hero {
-  background: linear-gradient(135deg, var(--lavender-soft), var(--mint-soft) 50%, var(--peach-soft));
-}
-[data-theme="pride"] .preview-hero-rainbow {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 6px;
-  background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
-  z-index: 2;
-}
-.preview-hero-rainbow { display: none; }
-[data-theme="pride"] .preview-hero-rainbow { display: block; }
-
-.preview-hero-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  text-align: center;
-  position: relative;
-  z-index: 1;
-}
-
-.preview-hero-heart {
-  width: 64px;
-  height: 64px;
-  margin: 0 auto 18px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--white);
-  border-radius: 50%;
-  box-shadow: 0 6px 20px rgba(232, 82, 138, 0.22);
-}
-.preview-hero-heart svg {
-  width: 32px;
-  height: 32px;
-  color: var(--pink-2);
-  fill: currentColor;
-}
-[data-theme="pride"] .preview-hero-heart svg {
-  color: var(--lavender-2);
-}
-
-.preview-eyebrow {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.18em;
-  color: var(--pink-2);
-  margin-bottom: 16px;
-}
-.preview-name {
-  font-family: var(--serif);
-  font-size: clamp(40px, 7vw, 64px);
-  font-weight: 600;
-  letter-spacing: -0.03em;
-  line-height: 1.0;
-  color: var(--ink);
-  margin: 0 0 14px;
-  font-variation-settings: "opsz" 144, "SOFT" 80;
-}
-.preview-name em {
-  font-style: italic;
-  color: var(--pink-2);
-  font-variation-settings: "opsz" 144, "SOFT" 100;
-}
-[data-theme="pride"] .preview-name em {
-  background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  color: transparent;
-}
-.preview-id-line {
-  font-size: 14px;
-  color: var(--ink-2);
-  font-family: var(--sans);
-  font-weight: 500;
-  margin-bottom: 16px;
-}
-.preview-tagline {
-  font-family: var(--script);
-  font-size: 22px;
-  color: var(--peach-2);
-  margin-top: 6px;
-}
-
-/* ACTION BAR */
-.preview-actions {
-  background: var(--white);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-  padding: 16px 24px;
-  position: sticky;
-  top: 0;
-  z-index: 50;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  background: rgba(255, 255, 255, 0.94);
-}
-.preview-actions-inner {
-  max-width: 720px;
-  margin: 0 auto;
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-.preview-action-btn {
-  flex: 1;
-  min-width: 130px;
-  padding: 12px 18px;
-  border-radius: 12px;
-  border: 1.5px solid var(--border);
-  background: var(--white);
-  font-family: var(--sans);
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--ink-2);
-  cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  transition: all 0.2s;
-  white-space: nowrap;
-}
-.preview-action-btn:hover {
-  border-color: var(--pink);
-  color: var(--pink-2);
-  transform: translateY(-1px);
-}
-.preview-action-btn.primary {
-  background: linear-gradient(135deg, var(--pink), var(--pink-2));
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 4px 14px rgba(232, 82, 138, 0.32);
-}
-.preview-action-btn.primary:hover {
-  color: white;
-  box-shadow: 0 6px 20px rgba(232, 82, 138, 0.42);
-}
-[data-theme="pride"] .preview-action-btn.primary {
-  background: linear-gradient(135deg, #B07CD8, #5DBFB5, #E8923D);
-}
-
-/* CONTENT */
-.preview-content {
-  padding: 56px 24px 40px;
-}
-.preview-content-inner {
-  max-width: 720px;
-  margin: 0 auto;
-}
-
-.preview-cat {
-  margin-bottom: 44px;
-}
-.preview-cat-label {
-  font-family: var(--serif);
-  font-style: italic;
-  font-weight: 600;
-  font-size: 28px;
-  color: var(--pink-2);
-  margin: 0 0 8px;
-  letter-spacing: -0.01em;
-  font-variation-settings: "opsz" 60, "SOFT" 100;
-}
-[data-theme="pride"] .preview-cat-label {
-  color: var(--lavender-2);
-}
-.preview-cat-rule {
-  width: 70px;
-  height: 2px;
-  background: var(--peach);
-  margin: 0 0 24px;
-  border-radius: 2px;
-  opacity: 0.7;
-}
-
-.preview-qa {
-  margin-bottom: 22px;
-  padding-bottom: 20px;
-  border-bottom: 1px dashed var(--border);
-}
-.preview-qa:last-child {
-  border-bottom: none;
-  margin-bottom: 0;
-  padding-bottom: 0;
-}
-.preview-q {
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 16px;
-  color: var(--ink-2);
-  line-height: 1.4;
-  margin: 0 0 8px;
-  font-variation-settings: "opsz" 24, "SOFT" 70;
-}
-.preview-a {
-  font-family: var(--sans);
-  font-size: 16px;
-  color: var(--ink);
-  line-height: 1.6;
-  white-space: pre-wrap;
-  margin: 0;
-}
-
-.preview-empty {
-  text-align: center;
-  padding: 80px 20px;
-  color: var(--ink-3);
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 19px;
-}
-
-/* FOOTER */
-.preview-footer {
-  text-align: center;
-  padding: 30px 20px 60px;
-  font-size: 13px;
-  color: var(--ink-3);
-  font-family: var(--sans);
-  border-top: 1px dashed var(--border);
-  margin: 0 24px;
-}
-.preview-footer em {
-  font-family: var(--script);
-  font-size: 18px;
-  color: var(--pink-2);
-  font-style: normal;
-  vertical-align: -1px;
-}
-
-@media (max-width: 540px) {
-  .preview-close { width: 36px; height: 36px; top: 12px; right: 12px; font-size: 14px; }
-  .preview-hero { padding: 60px 18px 40px; }
-  .preview-hero-heart { width: 54px; height: 54px; margin-bottom: 14px; }
-  .preview-hero-heart svg { width: 26px; height: 26px; }
-  .preview-actions { padding: 12px 16px; }
-  .preview-action-btn { font-size: 12px; padding: 10px 8px; min-width: 0; }
-  .preview-content { padding: 36px 18px 30px; }
-  .preview-cat { margin-bottom: 36px; }
-  .preview-cat-label { font-size: 24px; }
-  .preview-tagline { font-size: 19px; }
-}
-
-</style>
+  </style>
 </head>
 <body>
 
@@ -1497,1204 +1497,1214 @@
 <div class="toast" id="toast"></div>
 
 <script>
-/* ======================================================================
-   DATA: Pre-loaded questions by category
-   ====================================================================== */
-const QUESTION_BANK = [
-  // BASICS
-  { cat: 'basics', q: "What's your name and what do you like to be called?" },
-  { cat: 'basics', q: "How old are you, and how do you feel about that number?" },
-  { cat: 'basics', q: "Where are you from, and where do you live now?" },
-  { cat: 'basics', q: "What do you do for work or study?" },
-  { cat: 'basics', q: "Do you have siblings? Where do you fall in the lineup?" },
-  { cat: 'basics', q: "Are you a morning person, night owl, or somewhere in between?" },
-  { cat: 'basics', q: "What's your love language (giving and receiving)?" },
-  { cat: 'basics', q: "What's your zodiac sign, and do you vibe with it?" },
+  /* ======================================================================
+     DATA: Pre-loaded questions by category
+     ====================================================================== */
+  const QUESTION_BANK = [
+    // BASICS
+    { cat: 'basics', q: "What's your name and what do you like to be called?" },
+    { cat: 'basics', q: "How old are you, and how do you feel about that number?" },
+    { cat: 'basics', q: "Where are you from, and where do you live now?" },
+    { cat: 'basics', q: "What do you do for work or study?" },
+    { cat: 'basics', q: "Do you have siblings? Where do you fall in the lineup?" },
+    { cat: 'basics', q: "Are you a morning person, night owl, or somewhere in between?" },
+    { cat: 'basics', q: "What's your love language (giving and receiving)?" },
+    { cat: 'basics', q: "What's your zodiac sign, and do you vibe with it?" },
 
-  // VIBES & PERSONALITY
-  { cat: 'vibes', q: "How would your closest friend describe you in three words?" },
-  { cat: 'vibes', q: "What's something you're weirdly good at?" },
-  { cat: 'vibes', q: "What are three things that instantly put you in a good mood?" },
-  { cat: 'vibes', q: "What's your biggest ick?" },
-  { cat: 'vibes', q: "Introvert, extrovert, or shapeshifter?" },
-  { cat: 'vibes', q: "What's something silly you take very seriously?" },
-  { cat: 'vibes', q: "Go-to comfort show or movie?" },
-  { cat: 'vibes', q: "What's a hot take you'll defend to the death?" },
+    // VIBES & PERSONALITY
+    { cat: 'vibes', q: "How would your closest friend describe you in three words?" },
+    { cat: 'vibes', q: "What's something you're weirdly good at?" },
+    { cat: 'vibes', q: "What are three things that instantly put you in a good mood?" },
+    { cat: 'vibes', q: "What's your biggest ick?" },
+    { cat: 'vibes', q: "Introvert, extrovert, or shapeshifter?" },
+    { cat: 'vibes', q: "What's something silly you take very seriously?" },
+    { cat: 'vibes', q: "Go-to comfort show or movie?" },
+    { cat: 'vibes', q: "What's a hot take you'll defend to the death?" },
 
-  // FAVORITES
-  { cat: 'favs', q: "Favorite song right now (no judgment)?" },
-  { cat: 'favs', q: "Top 3 artists or bands of all time?" },
-  { cat: 'favs', q: "Favorite food you could eat every single day?" },
-  { cat: 'favs', q: "Coffee, tea, or something else entirely?" },
-  { cat: 'favs', q: "Favorite book or the last one you actually finished?" },
-  { cat: 'favs', q: "Favorite kind of weather?" },
-  { cat: 'favs', q: "Favorite way to spend a Sunday?" },
-  { cat: 'favs', q: "Favorite scent that feels like home?" },
+    // FAVORITES
+    { cat: 'favs', q: "Favorite song right now (no judgment)?" },
+    { cat: 'favs', q: "Top 3 artists or bands of all time?" },
+    { cat: 'favs', q: "Favorite food you could eat every single day?" },
+    { cat: 'favs', q: "Coffee, tea, or something else entirely?" },
+    { cat: 'favs', q: "Favorite book or the last one you actually finished?" },
+    { cat: 'favs', q: "Favorite kind of weather?" },
+    { cat: 'favs', q: "Favorite way to spend a Sunday?" },
+    { cat: 'favs', q: "Favorite scent that feels like home?" },
 
-  // LOVE & DATING
-  { cat: 'love', q: "What's your love language (giving and receiving)?" },
-  { cat: 'love', q: "What do you find most attractive in someone?" },
-  { cat: 'love', q: "Are you looking for something casual, serious, or just seeing?" },
-  { cat: 'love', q: "What's a green flag you've learned to recognize?" },
-  { cat: 'love', q: "What's a red flag you used to ignore but won't anymore?" },
-  { cat: 'love', q: "What's your idea of a perfect first date?" },
-  { cat: 'love', q: "How do you show someone you like them?" },
-  { cat: 'love', q: "What makes you feel most loved?" },
-  { cat: 'love', q: "What's your attachment style (or best guess)?" },
-  { cat: 'love', q: "How important is physical touch to you?" },
+    // LOVE & DATING
+    { cat: 'love', q: "What's your love language (giving and receiving)?" },
+    { cat: 'love', q: "What do you find most attractive in someone?" },
+    { cat: 'love', q: "Are you looking for something casual, serious, or just seeing?" },
+    { cat: 'love', q: "What's a green flag you've learned to recognize?" },
+    { cat: 'love', q: "What's a red flag you used to ignore but won't anymore?" },
+    { cat: 'love', q: "What's your idea of a perfect first date?" },
+    { cat: 'love', q: "How do you show someone you like them?" },
+    { cat: 'love', q: "What makes you feel most loved?" },
+    { cat: 'love', q: "What's your attachment style (or best guess)?" },
+    { cat: 'love', q: "How important is physical touch to you?" },
 
-  // VALUES & DEEPER
-  { cat: 'deep', q: "What's a value you won't compromise on?" },
-  { cat: 'deep', q: "What's something you're still healing from?" },
-  { cat: 'deep', q: "What does a good life look like to you?" },
-  { cat: 'deep', q: "What's a lesson you learned the hard way?" },
-  { cat: 'deep', q: "What are you most afraid of (emotionally, not like spiders)?" },
-  { cat: 'deep', q: "Do you believe in soulmates, timing, both, or neither?" },
-  { cat: 'deep', q: "Do you want kids someday? Pets? Neither? Both?" },
-  { cat: 'deep', q: "What's your relationship with your family like?" },
-  { cat: 'deep', q: "What do you need more of in your life right now?" },
-  { cat: 'deep', q: "If therapy were free, what would you work on first?" },
+    // VALUES & DEEPER
+    { cat: 'deep', q: "What's a value you won't compromise on?" },
+    { cat: 'deep', q: "What's something you're still healing from?" },
+    { cat: 'deep', q: "What does a good life look like to you?" },
+    { cat: 'deep', q: "What's a lesson you learned the hard way?" },
+    { cat: 'deep', q: "What are you most afraid of (emotionally, not like spiders)?" },
+    { cat: 'deep', q: "Do you believe in soulmates, timing, both, or neither?" },
+    { cat: 'deep', q: "Do you want kids someday? Pets? Neither? Both?" },
+    { cat: 'deep', q: "What's your relationship with your family like?" },
+    { cat: 'deep', q: "What do you need more of in your life right now?" },
+    { cat: 'deep', q: "If therapy were free, what would you work on first?" },
 
-  // FUN & RANDOM
-  { cat: 'fun', q: "Dream travel destination?" },
-  { cat: 'fun', q: "What's a weird fear you have?" },
-  { cat: 'fun', q: "Window seat or aisle?" },
-  { cat: 'fun', q: "Sweet or savory?" },
-  { cat: 'fun', q: "Beach person or mountain person?" },
-  { cat: 'fun', q: "What's a movie or show that changed how you see the world?" },
-  { cat: 'fun', q: "If you had to eat one cuisine for the rest of your life, which?" },
-  { cat: 'fun', q: "What's the last thing that made you laugh out loud?" },
-  { cat: 'fun', q: "What's a small thing that makes you unreasonably happy?" },
-  { cat: 'fun', q: "What's your most controversial food opinion?" },
+    // FUN & RANDOM
+    { cat: 'fun', q: "Dream travel destination?" },
+    { cat: 'fun', q: "What's a weird fear you have?" },
+    { cat: 'fun', q: "Window seat or aisle?" },
+    { cat: 'fun', q: "Sweet or savory?" },
+    { cat: 'fun', q: "Beach person or mountain person?" },
+    { cat: 'fun', q: "What's a movie or show that changed how you see the world?" },
+    { cat: 'fun', q: "If you had to eat one cuisine for the rest of your life, which?" },
+    { cat: 'fun', q: "What's the last thing that made you laugh out loud?" },
+    { cat: 'fun', q: "What's a small thing that makes you unreasonably happy?" },
+    { cat: 'fun', q: "What's your most controversial food opinion?" },
 
-  // SPICY (still SFW)
-  { cat: 'spicy', q: "What's a personality trait you find really hot?" },
-  { cat: 'spicy', q: "PDA — yes, no, or situational?" },
-  { cat: 'spicy', q: "What's something you find unexpectedly attractive?" },
-  { cat: 'spicy', q: "Big spoon, little spoon, or personal-space spoon?" },
-  { cat: 'spicy', q: "What's your texting style when you actually like someone?" },
-  { cat: 'spicy', q: "Good morning texts — delightful or excessive?" },
+    // SPICY (still SFW)
+    { cat: 'spicy', q: "What's a personality trait you find really hot?" },
+    { cat: 'spicy', q: "PDA — yes, no, or situational?" },
+    { cat: 'spicy', q: "What's something you find unexpectedly attractive?" },
+    { cat: 'spicy', q: "Big spoon, little spoon, or personal-space spoon?" },
+    { cat: 'spicy', q: "What's your texting style when you actually like someone?" },
+    { cat: 'spicy', q: "Good morning texts — delightful or excessive?" },
 
-  // IDENTITY — thoughtful, works for any gender
-  { cat: 'identity', q: "How do you describe your gender (in your own words)?" },
-  { cat: 'identity', q: "Are you out, half-out, or selectively out — and is that comfortable for you?" },
-  { cat: 'identity', q: "What was your relationship with gender like growing up?" },
-  { cat: 'identity', q: "Who do you typically date? (gender, vibe, anything you want to share)" },
-  { cat: 'identity', q: "What's a stereotype about your gender or orientation that doesn't fit you at all?" },
-  { cat: 'identity', q: "What's something you wish people understood about your identity without you having to explain?" },
-  { cat: 'identity', q: "Is there language or terminology you prefer (or avoid) when someone talks about you?" },
-  { cat: 'identity', q: "What's a part of your identity you're proud of?" },
-  { cat: 'identity', q: "Have you ever felt boxed in by gender roles — and how did that look?" },
-  { cat: 'identity', q: "What does masculinity, femininity, or neither mean to you personally?" },
+    // IDENTITY — thoughtful, works for any gender
+    { cat: 'identity', q: "How do you describe your gender (in your own words)?" },
+    { cat: 'identity', q: "Are you out, half-out, or selectively out — and is that comfortable for you?" },
+    { cat: 'identity', q: "What was your relationship with gender like growing up?" },
+    { cat: 'identity', q: "Who do you typically date? (gender, vibe, anything you want to share)" },
+    { cat: 'identity', q: "What's a stereotype about your gender or orientation that doesn't fit you at all?" },
+    { cat: 'identity', q: "What's something you wish people understood about your identity without you having to explain?" },
+    { cat: 'identity', q: "Is there language or terminology you prefer (or avoid) when someone talks about you?" },
+    { cat: 'identity', q: "What's a part of your identity you're proud of?" },
+    { cat: 'identity', q: "Have you ever felt boxed in by gender roles — and how did that look?" },
+    { cat: 'identity', q: "What does masculinity, femininity, or neither mean to you personally?" },
 
-  // BRO STUFF — sports, gaming, gym, cars, "guy" pop culture (anyone can answer)
-  { cat: 'bro', q: "Favorite sports team(s) — and how loyal are you really?" },
-  { cat: 'bro', q: "Sport you'd watch any time it's on TV?" },
-  { cat: 'bro', q: "Are you a gym bro, casual gym goer, or anti-gym?" },
-  { cat: 'bro', q: "Best video game of all time — fight me." },
-  { cat: 'bro', q: "Console, PC, mobile, or all of the above?" },
-  { cat: 'bro', q: "Can you cook, or are you a takeout-and-protein-shake person?" },
-  { cat: 'bro', q: "Dream car, even if you'll never own it?" },
-  { cat: 'bro', q: "Sneakers — collector, casual, or one pair forever?" },
-  { cat: 'bro', q: "What's your stance on cologne — daily ritual or special occasions only?" },
-  { cat: 'bro', q: "Beard, clean shave, or stubble life?" },
-  { cat: 'bro', q: "Football, basketball, F1, cricket, or 'sports aren't really my thing'?" },
-  { cat: 'bro', q: "Whiskey, beer, cocktails, or sober-curious?" },
+    // BRO STUFF — sports, gaming, gym, cars, "guy" pop culture (anyone can answer)
+    { cat: 'bro', q: "Favorite sports team(s) — and how loyal are you really?" },
+    { cat: 'bro', q: "Sport you'd watch any time it's on TV?" },
+    { cat: 'bro', q: "Are you a gym bro, casual gym goer, or anti-gym?" },
+    { cat: 'bro', q: "Best video game of all time — fight me." },
+    { cat: 'bro', q: "Console, PC, mobile, or all of the above?" },
+    { cat: 'bro', q: "Can you cook, or are you a takeout-and-protein-shake person?" },
+    { cat: 'bro', q: "Dream car, even if you'll never own it?" },
+    { cat: 'bro', q: "Sneakers — collector, casual, or one pair forever?" },
+    { cat: 'bro', q: "What's your stance on cologne — daily ritual or special occasions only?" },
+    { cat: 'bro', q: "Beard, clean shave, or stubble life?" },
+    { cat: 'bro', q: "Football, basketball, F1, cricket, or 'sports aren't really my thing'?" },
+    { cat: 'bro', q: "Whiskey, beer, cocktails, or sober-curious?" },
 
-  // GIRLY THINGS — beauty, fashion, pop girlies, group chat content
-  { cat: 'girly', q: "Sephora, Ulta, drugstore, or all of the above?" },
-  { cat: 'girly', q: "Skincare routine — minimal, 10-step, or somewhere chaotic in between?" },
-  { cat: 'girly', q: "Signature scent or rotating perfume collection?" },
-  { cat: 'girly', q: "Your taste in fashion right now — three brands or aesthetics?" },
-  { cat: 'girly', q: "Are you a Taylor, Sabrina, Olivia, Beyoncé, or 'I love them all' girlie?" },
-  { cat: 'girly', q: "Favorite group of friends to gossip with — close circle or wide network?" },
-  { cat: 'girly', q: "Pilates girlie, run club girlie, gym girlie, or 'rest is also a workout'?" },
-  { cat: 'girly', q: "Iced coffee, matcha, hot girl walk drink — your daily order?" },
-  { cat: 'girly', q: "What's your one beauty splurge that's worth every penny?" },
-  { cat: 'girly', q: "Bath girlie, shower girlie, or 'depends on the night'?" },
-  { cat: 'girly', q: "Your unhinged but oddly specific aesthetic in three words?" },
-  { cat: 'girly', q: "Reality TV obsession or 'I'd never lower myself to that' (lying)?" },
+    // GIRLY THINGS — beauty, fashion, pop girlies, group chat content
+    { cat: 'girly', q: "Sephora, Ulta, drugstore, or all of the above?" },
+    { cat: 'girly', q: "Skincare routine — minimal, 10-step, or somewhere chaotic in between?" },
+    { cat: 'girly', q: "Signature scent or rotating perfume collection?" },
+    { cat: 'girly', q: "Your taste in fashion right now — three brands or aesthetics?" },
+    { cat: 'girly', q: "Are you a Taylor, Sabrina, Olivia, Beyoncé, or 'I love them all' girlie?" },
+    { cat: 'girly', q: "Favorite group of friends to gossip with — close circle or wide network?" },
+    { cat: 'girly', q: "Pilates girlie, run club girlie, gym girlie, or 'rest is also a workout'?" },
+    { cat: 'girly', q: "Iced coffee, matcha, hot girl walk drink — your daily order?" },
+    { cat: 'girly', q: "What's your one beauty splurge that's worth every penny?" },
+    { cat: 'girly', q: "Bath girlie, shower girlie, or 'depends on the night'?" },
+    { cat: 'girly', q: "Your unhinged but oddly specific aesthetic in three words?" },
+    { cat: 'girly', q: "Reality TV obsession or 'I'd never lower myself to that' (lying)?" },
 
-  // QUEER LIFE — community, dating apps, chosen family, queer culture
-  { cat: 'queer', q: "When did you first know? (Or, when did the puzzle pieces click?)" },
-  { cat: 'queer', q: "Hinge, Tinder, Feeld, Lex, HER, Grindr — what's your app of choice and why?" },
-  { cat: 'queer', q: "Chosen family vs blood family — what's that balance look like for you?" },
-  { cat: 'queer', q: "Favorite queer creator, artist, or icon right now?" },
-  { cat: 'queer', q: "Pride parade — go all out, low-key, or skip and party at home?" },
-  { cat: 'queer', q: "What's a piece of queer media that genuinely changed something for you?" },
-  { cat: 'queer', q: "Most underrated queer love song?" },
-  { cat: 'queer', q: "Soft butch, high femme, fluid, masc, or none of the above?" },
-  { cat: 'queer', q: "What's something queer people just *get* without explaining?" },
-  { cat: 'queer', q: "What community space (online or IRL) feels most like home?" },
-];
+    // QUEER LIFE — community, dating apps, chosen family, queer culture
+    { cat: 'queer', q: "When did you first know? (Or, when did the puzzle pieces click?)" },
+    { cat: 'queer', q: "Hinge, Tinder, Feeld, Lex, HER, Grindr — what's your app of choice and why?" },
+    { cat: 'queer', q: "Chosen family vs blood family — what's that balance look like for you?" },
+    { cat: 'queer', q: "Favorite queer creator, artist, or icon right now?" },
+    { cat: 'queer', q: "Pride parade — go all out, low-key, or skip and party at home?" },
+    { cat: 'queer', q: "What's a piece of queer media that genuinely changed something for you?" },
+    { cat: 'queer', q: "Most underrated queer love song?" },
+    { cat: 'queer', q: "Soft butch, high femme, fluid, masc, or none of the above?" },
+    { cat: 'queer', q: "What's something queer people just *get* without explaining?" },
+    { cat: 'queer', q: "What community space (online or IRL) feels most like home?" },
+  ];
 
-const CATEGORIES = [
-  { key: 'all',      label: '✨ All',          },
-  { key: 'basics',   label: '🌷 Basics'       },
-  { key: 'vibes',    label: '🌿 Vibes'        },
-  { key: 'favs',     label: '🎀 Favorites'    },
-  { key: 'love',     label: '💌 Love'         },
-  { key: 'identity', label: '🏳️‍🌈 Identity'    },
-  { key: 'bro',      label: '💪 Bro Stuff'    },
-  { key: 'girly',    label: '💅 Girly Things' },
-  { key: 'queer',    label: '🌈 Queer Life'   },
-  { key: 'deep',     label: '🕯️ Deeper'       },
-  { key: 'fun',      label: '🍓 Fun'          },
-  { key: 'spicy',    label: '🌶️ Spicy'        },
-  { key: 'custom',   label: '✏️ My questions' },
-];
+  const CATEGORIES = [
+    { key: 'all',      label: '✨ All',          },
+    { key: 'basics',   label: '🌷 Basics'       },
+    { key: 'vibes',    label: '🌿 Vibes'        },
+    { key: 'favs',     label: '🎀 Favorites'    },
+    { key: 'love',     label: '💌 Love'         },
+    { key: 'identity', label: '🏳️‍🌈 Identity'    },
+    { key: 'bro',      label: '💪 Bro Stuff'    },
+    { key: 'girly',    label: '💅 Girly Things' },
+    { key: 'queer',    label: '🌈 Queer Life'   },
+    { key: 'deep',     label: '🕯️ Deeper'       },
+    { key: 'fun',      label: '🍓 Fun'          },
+    { key: 'spicy',    label: '🌶️ Spicy'        },
+    { key: 'custom',   label: '✏️ My questions' },
+  ];
 
-/* ======================================================================
-   STATE
-   ====================================================================== */
-const STORAGE_KEY = 'aboutMePls_v1';
-let state = {
-  name: '',
-  pronouns: '',       // selected pronouns (e.g. 'she/her' or custom)
-  pronounsCustom: '', // raw custom text if 'custom' was picked
-  gender: '',         // selected gender label or 'other'
-  genderCustom: '',   // raw custom text
-  theme: 'pink',      // 'pink' | 'blue' | 'pride'
-  answers: {},   // id -> text
-  skipped: {},   // id -> true
-  custom: [],    // [{id, q}]
-  activeCat: 'all',
-};
+  /* ======================================================================
+     STATE
+     ====================================================================== */
+  const STORAGE_KEY = 'aboutMePls_v1';
+  let state = {
+    name: '',
+    pronouns: '',       // selected pronouns (e.g. 'she/her' or custom)
+    pronounsCustom: '', // raw custom text if 'custom' was picked
+    gender: '',         // selected gender label or 'other'
+    genderCustom: '',   // raw custom text
+    theme: 'pink',      // 'pink' | 'blue' | 'pride'
+    answers: {},   // id -> text
+    skipped: {},   // id -> true
+    custom: [],    // [{id, q}]
+    activeCat: 'all',
+  };
 
-/* ======================================================================
-   SHARE-LINK ENCODING
-   Encodes the user's answers into a URL-safe base64 string appended to
-   the URL as a hash fragment (e.g. #me=eyJuIjoi...). Opening the link
-   pre-fills the page with those answers — no backend required.
-   ====================================================================== */
-function encodeState(s) {
-  const minimal = {};
-  if (s.name) minimal.n = s.name;
-  if (s.pronouns) minimal.p = s.pronouns;
-  if (s.pronounsCustom) minimal.pc = s.pronounsCustom;
-  if (s.gender) minimal.g = s.gender;
-  if (s.genderCustom) minimal.gc = s.genderCustom;
-  if (s.theme && s.theme !== 'pink') minimal.t = s.theme;
+  /* ======================================================================
+     SHARE-LINK ENCODING
+     Encodes the user's answers into a URL-safe base64 string appended to
+     the URL as a hash fragment (e.g. #me=eyJuIjoi...). Opening the link
+     pre-fills the page with those answers — no backend required.
+     ====================================================================== */
+  function encodeState(s) {
+    const minimal = {};
+    if (s.name) minimal.n = s.name;
+    if (s.pronouns) minimal.p = s.pronouns;
+    if (s.pronounsCustom) minimal.pc = s.pronounsCustom;
+    if (s.gender) minimal.g = s.gender;
+    if (s.genderCustom) minimal.gc = s.genderCustom;
+    if (s.theme && s.theme !== 'pink') minimal.t = s.theme;
 
-  const ans = {};
-  for (const k of Object.keys(s.answers || {})) {
-    const v = s.answers[k];
-    if (v && v.trim()) ans[k] = v;
+    const ans = {};
+    for (const k of Object.keys(s.answers || {})) {
+      const v = s.answers[k];
+      if (v && v.trim()) ans[k] = v;
+    }
+    if (Object.keys(ans).length) minimal.a = ans;
+
+    const sk = {};
+    for (const k of Object.keys(s.skipped || {})) {
+      if (s.skipped[k]) sk[k] = 1;
+    }
+    if (Object.keys(sk).length) minimal.s = sk;
+
+    if (s.custom && s.custom.length) minimal.c = s.custom;
+
+    const json = JSON.stringify(minimal);
+    // UTF-8 safe base64 (handles emojis & special chars)
+    const utf8 = unescape(encodeURIComponent(json));
+    const b64 = btoa(utf8);
+    // URL-safe variant
+    return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   }
-  if (Object.keys(ans).length) minimal.a = ans;
 
-  const sk = {};
-  for (const k of Object.keys(s.skipped || {})) {
-    if (s.skipped[k]) sk[k] = 1;
+  function decodeState(encoded) {
+    try {
+      let b64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+      while (b64.length % 4) b64 += '=';
+      const utf8 = atob(b64);
+      const json = decodeURIComponent(escape(utf8));
+      const data = JSON.parse(json);
+      const skipped = {};
+      for (const k of Object.keys(data.s || {})) skipped[k] = true;
+      return {
+        name: data.n || '',
+        pronouns: data.p || '',
+        pronounsCustom: data.pc || '',
+        gender: data.g || '',
+        genderCustom: data.gc || '',
+        theme: data.t || 'pink',
+        answers: data.a || {},
+        skipped,
+        custom: data.c || [],
+      };
+    } catch (e) {
+      return null;
+    }
   }
-  if (Object.keys(sk).length) minimal.s = sk;
 
-  if (s.custom && s.custom.length) minimal.c = s.custom;
+  function loadStateFromHash() {
+    try {
+      const hash = window.location.hash || '';
+      if (!hash.startsWith('#me=')) return false;
+      const encoded = hash.slice(4);
+      const decoded = decodeState(encoded);
+      if (!decoded) return false;
+      state = { ...state, ...decoded };
 
-  const json = JSON.stringify(minimal);
-  // UTF-8 safe base64 (handles emojis & special chars)
-  const utf8 = unescape(encodeURIComponent(json));
-  const b64 = btoa(utf8);
-  // URL-safe variant
-  return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
-}
+      // Check if the link was shared with ?view=1 — if so, auto-open preview
+      const shouldOpenView = new URLSearchParams(window.location.search).get('view') === '1';
 
-function decodeState(encoded) {
-  try {
-    let b64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
-    while (b64.length % 4) b64 += '=';
-    const utf8 = atob(b64);
-    const json = decodeURIComponent(escape(utf8));
-    const data = JSON.parse(json);
-    const skipped = {};
-    for (const k of Object.keys(data.s || {})) skipped[k] = true;
-    return {
-      name: data.n || '',
-      pronouns: data.p || '',
-      pronounsCustom: data.pc || '',
-      gender: data.g || '',
-      genderCustom: data.gc || '',
-      theme: data.t || 'pink',
-      answers: data.a || {},
-      skipped,
-      custom: data.c || [],
+      // Strip hash and view param so future reloads don't re-trigger
+      try {
+        window.history.replaceState(null, '', window.location.pathname);
+      } catch (e) {}
+
+      if (shouldOpenView) {
+        // Open the preview modal after the page has fully rendered
+        setTimeout(() => openPreview(), 400);
+      } else {
+        setTimeout(() => showToast('Loaded shared answers ♡'), 250);
+      }
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /* ======================================================================
+     INIT
+     ====================================================================== */
+  function init() {
+    // Try to load from a shared link first (#me=...) — falls back to storage
+    const fromHash = loadStateFromHash();
+    if (!fromHash) loadState();
+
+    applyTheme(state.theme || 'pink');
+    renderCategories();
+    renderQuestions();
+    renderAddCustom();
+    updateProgress();
+
+    // Name input
+    document.getElementById('userName').value = state.name || '';
+    document.getElementById('userName').addEventListener('input', (e) => {
+      state.name = e.target.value;
+      saveState();
+    });
+
+    // Pronouns pills
+    initPills('pronounPills', 'customPronoun', 'pronouns', 'pronounsCustom');
+    // Gender pills
+    initPills('genderPills', 'customGender', 'gender', 'genderCustom');
+
+    // Theme buttons
+    document.querySelectorAll('.theme-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-theme');
+        state.theme = theme;
+        applyTheme(theme);
+        saveState();
+      });
+      if (btn.getAttribute('data-theme') === (state.theme || 'pink')) {
+        btn.classList.add('active');
+      }
+    });
+
+    document.getElementById('viewAnswersBtn').addEventListener('click', openPreview);
+
+    // Preview modal buttons
+    document.getElementById('previewDownloadBtn').addEventListener('click', downloadPDF);
+    document.getElementById('previewCopyLinkBtn').addEventListener('click', copyShareLink);
+    document.getElementById('previewShareBtn').addEventListener('click', shareApp);
+    document.getElementById('previewClose').addEventListener('click', closePreview);
+    document.getElementById('previewOverlay').addEventListener('click', (e) => {
+      if (e.target.id === 'previewOverlay') closePreview();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && document.getElementById('previewOverlay').classList.contains('open')) {
+        closePreview();
+      }
+    });
+
+    document.getElementById('resetBtn').addEventListener('click', () => {
+      if (confirm('Clear all answers and start fresh?')) {
+        // No persistence to clear — just reload to a clean in-memory state
+        location.reload();
+      }
+    });
+  }
+
+  /* ======================================================================
+     PREVIEW MODAL ("View answers")
+     ====================================================================== */
+  function openPreview() {
+    renderPreview();
+    const overlay = document.getElementById('previewOverlay');
+    overlay.classList.add('open');
+    overlay.setAttribute('aria-hidden', 'false');
+    overlay.scrollTop = 0;
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePreview() {
+    const overlay = document.getElementById('previewOverlay');
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  const CAT_LABELS_PREVIEW = {
+    basics:   '🌷 Basics',
+    vibes:    '🌿 Vibes',
+    favs:     '🎀 Favorites',
+    love:     '💌 Love',
+    identity: '🏳️‍🌈 Identity',
+    bro:      '💪 Bro Stuff',
+    girly:    '💅 Girly Things',
+    queer:    '🌈 Queer Life',
+    deep:     '🕯️ Deeper',
+    fun:      '🍓 Fun',
+    spicy:    '🌶️ Spicy',
+    custom:   '✏️ My own questions',
+  };
+  const CAT_ORDER_PREVIEW = ['basics','vibes','favs','love','identity','bro','girly','queer','deep','fun','spicy','custom'];
+
+  function renderPreview() {
+    const body = document.getElementById('previewBody');
+    body.innerHTML = '';
+
+    const name = (state.name || '').trim() || 'Me';
+    const finalPronouns = state.pronouns === 'custom' ? state.pronounsCustom : state.pronouns;
+    const finalGender = state.gender === 'other' ? state.genderCustom : state.gender;
+    const idParts = [];
+    if (finalPronouns && finalPronouns.trim()) idParts.push(finalPronouns.trim());
+    if (finalGender && finalGender.trim()) idParts.push(finalGender.trim());
+
+    // Populate hero name + id line
+    document.getElementById('previewName').innerHTML = `about <em>${escapeHtml(name)}</em>`;
+    const idEl = document.getElementById('previewIdLine');
+    if (idParts.length) {
+      idEl.textContent = idParts.join(' · ');
+      idEl.style.display = '';
+    } else {
+      idEl.style.display = 'none';
+    }
+
+    // Group answered questions by category
+    const all = getAllQuestions();
+    const byCat = {};
+    all.forEach(q => {
+      const ans = (state.answers[q.id] || '').trim();
+      if (!ans) return;
+      if (!byCat[q.cat]) byCat[q.cat] = [];
+      byCat[q.cat].push({ ...q, answer: ans });
+    });
+
+    if (Object.keys(byCat).length === 0) {
+      const empty = document.createElement('div');
+      empty.className = 'preview-empty';
+      empty.textContent = "(no answers yet — go back and fill some in ♡)";
+      body.appendChild(empty);
+      return;
+    }
+
+    CAT_ORDER_PREVIEW.forEach(catKey => {
+      if (!byCat[catKey] || byCat[catKey].length === 0) return;
+      const section = document.createElement('div');
+      section.className = 'preview-cat';
+      let html = `
+        <div class="preview-cat-label">${CAT_LABELS_PREVIEW[catKey] || catKey}</div>
+        <div class="preview-cat-rule"></div>
+      `;
+      byCat[catKey].forEach(item => {
+        html += `
+          <div class="preview-qa">
+            <p class="preview-q">${escapeHtml(item.q)}</p>
+            <p class="preview-a">${escapeHtml(item.answer)}</p>
+          </div>
+        `;
+      });
+      section.innerHTML = html;
+      body.appendChild(section);
+    });
+  }
+
+  /* ======================================================================
+     COPY LINK + SHARE
+     ====================================================================== */
+  async function copyShareLink() {
+    try {
+      const encoded = encodeState(state);
+      const base = window.location.origin + window.location.pathname;
+      const url = `${base}?view=1#me=${encoded}`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      showToast('Link copied — paste it anywhere ♡');
+    } catch (e) {
+      showToast("Couldn't copy link — try again");
+    }
+  }
+
+  async function shareApp() {
+    const url = (window.location.origin + window.location.pathname + window.location.search) || '';
+    const shareData = {
+      title: 'About Me, Pls.',
+      text: 'Skip the small talk — fill this out instead.',
+      url: url,
     };
-  } catch (e) {
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        return;
+      } catch (e) {
+        if (e && e.name === 'AbortError') return;
+        // Otherwise fall through to clipboard fallback
+      }
+    }
+
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(url);
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = url;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+      showToast('Link copied ♡');
+    } catch (e) {
+      showToast("Couldn't copy link");
+    }
+  }
+
+  /* Pronoun/gender pill handler */
+  function initPills(pillsId, customInputId, stateKey, customStateKey) {
+    const pills = document.querySelectorAll(`#${pillsId} .pp`);
+    const customInput = document.getElementById(customInputId);
+
+    // Restore previously selected pill
+    const currentVal = state[stateKey];
+    let foundMatch = false;
+    pills.forEach(pill => {
+      const val = pill.getAttribute('data-val');
+      if (val === currentVal) {
+        pill.classList.add('active');
+        foundMatch = true;
+      }
+    });
+    // Custom case
+    if (!foundMatch && state[customStateKey]) {
+      pills.forEach(p => { if (p.getAttribute('data-val') === (pillsId === 'pronounPills' ? 'custom' : 'other')) p.classList.add('active'); });
+      customInput.style.display = 'block';
+      customInput.value = state[customStateKey];
+    }
+
+    pills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const val = pill.getAttribute('data-val');
+        pills.forEach(p => p.classList.remove('active'));
+        pill.classList.add('active');
+
+        if (val === 'custom' || val === 'other') {
+          customInput.style.display = 'block';
+          customInput.focus();
+          state[stateKey] = val;
+        } else {
+          customInput.style.display = 'none';
+          customInput.value = '';
+          state[stateKey] = val;
+          state[customStateKey] = '';
+        }
+        saveState();
+        // Update category suggestions if gender changed
+        if (stateKey === 'gender') renderCategories();
+      });
+    });
+
+    customInput.addEventListener('input', (e) => {
+      state[customStateKey] = e.target.value;
+      saveState();
+    });
+  }
+
+  /* Apply theme to body via data attribute */
+  function applyTheme(theme) {
+    if (theme === 'pink') {
+      document.body.removeAttribute('data-theme');
+    } else {
+      document.body.setAttribute('data-theme', theme);
+    }
+    document.querySelectorAll('.theme-btn').forEach(b => {
+      b.classList.toggle('active', b.getAttribute('data-theme') === theme);
+    });
+  }
+
+  /* ======================================================================
+     STATE PERSISTENCE
+     ----------------------------------------------------------------------
+     This app is intentionally one-time-use: nothing is saved to the
+     browser. The only ways to keep your answers are (1) Copy Link —
+     which encodes everything into a URL, or (2) Download PDF.
+
+     These functions are kept as no-ops so the rest of the code can still
+     call them harmlessly. The hash-loading flow in init() is the one
+     exception — that's how shared links re-populate the page.
+     ====================================================================== */
+  function saveState() { /* no-op — see comment above */ }
+  function loadState() { /* no-op — see comment above */ }
+
+  /* ======================================================================
+     RENDER: Categories
+     ====================================================================== */
+  function renderCategories() {
+    const root = document.getElementById('categories');
+    root.innerHTML = '';
+
+    // Figure out which "vibe-coded" category to suggest based on gender
+    const suggestedCat = getSuggestedCategory();
+
+    CATEGORIES.forEach(c => {
+      // Hide the "Custom" filter until the user adds at least one
+      if (c.key === 'custom' && state.custom.length === 0) return;
+
+      const btn = document.createElement('button');
+      btn.className = 'cat-btn' + (state.activeCat === c.key ? ' active' : '');
+      if (c.key === suggestedCat) btn.classList.add('suggested');
+
+      const count = c.key === 'all'
+        ? QUESTION_BANK.length + state.custom.length
+        : (c.key === 'custom' ? state.custom.length : QUESTION_BANK.filter(q => q.cat === c.key).length);
+
+      const star = (c.key === suggestedCat) ? '<span class="star" title="Suggested for you">⭐</span>' : '';
+      btn.innerHTML = `${c.label}${star} <span class="count">${count}</span>`;
+      btn.onclick = () => {
+        state.activeCat = c.key;
+        renderCategories();
+        renderQuestions();
+      };
+      root.appendChild(btn);
+    });
+  }
+
+  function getSuggestedCategory() {
+    const g = (state.gender || '').toLowerCase();
+    if (g === 'man') return 'bro';
+    if (g === 'woman') return 'girly';
+    if (g === 'non-binary') return 'queer';
+    // For 'other' / custom: don't suggest, let them browse
     return null;
   }
-}
 
-function loadStateFromHash() {
-  try {
-    const hash = window.location.hash || '';
-    if (!hash.startsWith('#me=')) return false;
-    const encoded = hash.slice(4);
-    const decoded = decodeState(encoded);
-    if (!decoded) return false;
-    state = { ...state, ...decoded };
-    // Strip hash so future reloads use storage normally
-    try {
-      window.history.replaceState(null, '', window.location.pathname + window.location.search);
-    } catch (e) {}
-    setTimeout(() => showToast('Loaded shared answers ♡'), 250);
-    return true;
-  } catch (e) {
-    return false;
-  }
-}
-
-/* ======================================================================
-   INIT
-   ====================================================================== */
-function init() {
-  // Try to load from a shared link first (#me=...) — falls back to storage
-  const fromHash = loadStateFromHash();
-  if (!fromHash) loadState();
-
-  applyTheme(state.theme || 'pink');
-  renderCategories();
-  renderQuestions();
-  renderAddCustom();
-  updateProgress();
-
-  // Name input
-  document.getElementById('userName').value = state.name || '';
-  document.getElementById('userName').addEventListener('input', (e) => {
-    state.name = e.target.value;
-    saveState();
-  });
-
-  // Pronouns pills
-  initPills('pronounPills', 'customPronoun', 'pronouns', 'pronounsCustom');
-  // Gender pills
-  initPills('genderPills', 'customGender', 'gender', 'genderCustom');
-
-  // Theme buttons
-  document.querySelectorAll('.theme-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const theme = btn.getAttribute('data-theme');
-      state.theme = theme;
-      applyTheme(theme);
-      saveState();
-    });
-    if (btn.getAttribute('data-theme') === (state.theme || 'pink')) {
-      btn.classList.add('active');
-    }
-  });
-
-  document.getElementById('viewAnswersBtn').addEventListener('click', openPreview);
-
-  // Preview modal buttons
-  document.getElementById('previewDownloadBtn').addEventListener('click', downloadPDF);
-  document.getElementById('previewCopyLinkBtn').addEventListener('click', copyShareLink);
-  document.getElementById('previewShareBtn').addEventListener('click', shareApp);
-  document.getElementById('previewClose').addEventListener('click', closePreview);
-  document.getElementById('previewOverlay').addEventListener('click', (e) => {
-    if (e.target.id === 'previewOverlay') closePreview();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && document.getElementById('previewOverlay').classList.contains('open')) {
-      closePreview();
-    }
-  });
-
-  document.getElementById('resetBtn').addEventListener('click', () => {
-    if (confirm('Clear all answers and start fresh?')) {
-      // No persistence to clear — just reload to a clean in-memory state
-      location.reload();
-    }
-  });
-}
-
-/* ======================================================================
-   PREVIEW MODAL ("View answers")
-   ====================================================================== */
-function openPreview() {
-  renderPreview();
-  const overlay = document.getElementById('previewOverlay');
-  overlay.classList.add('open');
-  overlay.setAttribute('aria-hidden', 'false');
-  overlay.scrollTop = 0;
-  document.body.style.overflow = 'hidden';
-}
-
-function closePreview() {
-  const overlay = document.getElementById('previewOverlay');
-  overlay.classList.remove('open');
-  overlay.setAttribute('aria-hidden', 'true');
-  document.body.style.overflow = '';
-}
-
-const CAT_LABELS_PREVIEW = {
-  basics:   '🌷 Basics',
-  vibes:    '🌿 Vibes',
-  favs:     '🎀 Favorites',
-  love:     '💌 Love',
-  identity: '🏳️‍🌈 Identity',
-  bro:      '💪 Bro Stuff',
-  girly:    '💅 Girly Things',
-  queer:    '🌈 Queer Life',
-  deep:     '🕯️ Deeper',
-  fun:      '🍓 Fun',
-  spicy:    '🌶️ Spicy',
-  custom:   '✏️ My own questions',
-};
-const CAT_ORDER_PREVIEW = ['basics','vibes','favs','love','identity','bro','girly','queer','deep','fun','spicy','custom'];
-
-function renderPreview() {
-  const body = document.getElementById('previewBody');
-  body.innerHTML = '';
-
-  const name = (state.name || '').trim() || 'Me';
-  const finalPronouns = state.pronouns === 'custom' ? state.pronounsCustom : state.pronouns;
-  const finalGender = state.gender === 'other' ? state.genderCustom : state.gender;
-  const idParts = [];
-  if (finalPronouns && finalPronouns.trim()) idParts.push(finalPronouns.trim());
-  if (finalGender && finalGender.trim()) idParts.push(finalGender.trim());
-
-  // Populate hero name + id line
-  document.getElementById('previewName').innerHTML = `about <em>${escapeHtml(name)}</em>`;
-  const idEl = document.getElementById('previewIdLine');
-  if (idParts.length) {
-    idEl.textContent = idParts.join(' · ');
-    idEl.style.display = '';
-  } else {
-    idEl.style.display = 'none';
+  /* ======================================================================
+     RENDER: Questions
+     ====================================================================== */
+  function getAllQuestions() {
+    const banked = QUESTION_BANK.map((q, i) => ({ id: `b${i}`, q: q.q, cat: q.cat, custom: false }));
+    const custom = state.custom.map(c => ({ id: c.id, q: c.q, cat: 'custom', custom: true }));
+    return [...banked, ...custom];
   }
 
-  // Group answered questions by category
-  const all = getAllQuestions();
-  const byCat = {};
-  all.forEach(q => {
-    const ans = (state.answers[q.id] || '').trim();
-    if (!ans) return;
-    if (!byCat[q.cat]) byCat[q.cat] = [];
-    byCat[q.cat].push({ ...q, answer: ans });
-  });
+  function renderQuestions() {
+    const root = document.getElementById('questions');
+    root.innerHTML = '';
 
-  if (Object.keys(byCat).length === 0) {
-    const empty = document.createElement('div');
-    empty.className = 'preview-empty';
-    empty.textContent = "(no answers yet — go back and fill some in ♡)";
-    body.appendChild(empty);
-    return;
-  }
-
-  CAT_ORDER_PREVIEW.forEach(catKey => {
-    if (!byCat[catKey] || byCat[catKey].length === 0) return;
-    const section = document.createElement('div');
-    section.className = 'preview-cat';
-    let html = `
-      <div class="preview-cat-label">${CAT_LABELS_PREVIEW[catKey] || catKey}</div>
-      <div class="preview-cat-rule"></div>
-    `;
-    byCat[catKey].forEach(item => {
-      html += `
-        <div class="preview-qa">
-          <p class="preview-q">${escapeHtml(item.q)}</p>
-          <p class="preview-a">${escapeHtml(item.answer)}</p>
-        </div>
-      `;
-    });
-    section.innerHTML = html;
-    body.appendChild(section);
-  });
-}
-
-/* ======================================================================
-   COPY LINK + SHARE
-   ====================================================================== */
-async function copyShareLink() {
-  try {
-    const encoded = encodeState(state);
-    const base = window.location.origin + window.location.pathname + window.location.search;
-    const url = `${base}#me=${encoded}`;
-
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(url);
-    } else {
-      const ta = document.createElement('textarea');
-      ta.value = url;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
+    let questions = getAllQuestions();
+    if (state.activeCat !== 'all') {
+      questions = questions.filter(q => q.cat === state.activeCat);
     }
-    showToast('Link copied — paste it anywhere ♡');
-  } catch (e) {
-    showToast("Couldn't copy link — try again");
-  }
-}
 
-async function shareApp() {
-  const url = (window.location.origin + window.location.pathname + window.location.search) || '';
-  const shareData = {
-    title: 'About Me, Pls.',
-    text: 'Skip the small talk — fill this out instead.',
-    url: url,
-  };
-
-  if (navigator.share) {
-    try {
-      await navigator.share(shareData);
+    if (questions.length === 0) {
+      root.innerHTML = '<div class="empty">Nothing here yet ~ try another category</div>';
       return;
-    } catch (e) {
-      if (e && e.name === 'AbortError') return;
-      // Otherwise fall through to clipboard fallback
     }
+
+    const AD_INTERVAL = 5; // one ad every 5 questions
+    questions.forEach((q, i) => {
+      root.appendChild(questionCard(q));
+      // After every 8th question (but not the very last one)
+      if ((i + 1) % AD_INTERVAL === 0 && i !== questions.length - 1) {
+        root.appendChild(adSlot(Math.floor(i / AD_INTERVAL)));
+      }
+    });
   }
 
-  try {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      await navigator.clipboard.writeText(url);
-    } else {
-      const ta = document.createElement('textarea');
-      ta.value = url;
-      ta.style.position = 'fixed';
-      ta.style.opacity = '0';
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-    }
-    showToast('Link copied ♡');
-  } catch (e) {
-    showToast("Couldn't copy link");
+  /* ============================================
+     AD SLOT
+     ============================================
+     These are placeholder test ads. To connect real ads:
+
+     1. Replace the adSlot() function below with a container that has
+        your AdSense/AdSense-alt code inside.
+     2. For Google AdSense, replace the .ad-content innerHTML with:
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+             data-ad-slot="YYYYYYYYYY"
+             data-ad-format="fluid"
+             data-ad-layout-key="-XX-YY+ZZ"></ins>
+        Then trigger (adsbygoogle=window.adsbygoogle||[]).push({}) after
+        each slot is inserted.
+     3. Approval note: AdSense typically requires the site be live on a
+        real domain with some traffic before approval.
+     ============================================ */
+  const TEST_ADS = [
+    {
+      icon: '💅',
+      title: 'Look your best for date night',
+      desc: 'Nail salons near you · Book in 30 seconds',
+      cta: 'Find salons',
+    },
+    {
+      icon: '🌸',
+      title: 'Bloom & Co. Flowers',
+      desc: 'Same-day bouquet delivery in your city',
+      cta: 'Send flowers',
+    },
+    {
+      icon: '☕',
+      title: 'First date? We know the vibe.',
+      desc: 'Cozy coffee spots rated by the community',
+      cta: 'Explore',
+    },
+    {
+      icon: '💬',
+      title: 'Journal your way through it',
+      desc: 'A dating-diary app for talking-stage survivors',
+      cta: 'Try free',
+    },
+    {
+      icon: '🎀',
+      title: 'Glossy — cute stationery',
+      desc: 'Notebooks, pens, and desk things that spark joy',
+      cta: 'Shop',
+    },
+    {
+      icon: '🌿',
+      title: 'Therapy that actually fits',
+      desc: 'Talk to a licensed therapist from your couch',
+      cta: 'Get matched',
+    },
+  ];
+
+  function adSlot(index = 0) {
+    const ad = TEST_ADS[index % TEST_ADS.length];
+    const wrap = document.createElement('div');
+    wrap.className = 'ad-slot';
+    wrap.setAttribute('data-ad-index', index);
+    wrap.innerHTML = `
+      <div class="ad-label">
+        <span class="tag-left">♡ Sponsored</span>
+        <span class="tag-right">Ad</span>
+      </div>
+      <div class="ad-content">
+        <div class="ad-placeholder-icon">${ad.icon}</div>
+        <div class="ad-placeholder-text">
+          <div class="ad-placeholder-title">${ad.title}</div>
+          <div class="ad-placeholder-desc">${ad.desc}</div>
+        </div>
+        <div class="ad-placeholder-cta">${ad.cta}</div>
+      </div>
+    `;
+    return wrap;
   }
-}
 
-/* Pronoun/gender pill handler */
-function initPills(pillsId, customInputId, stateKey, customStateKey) {
-  const pills = document.querySelectorAll(`#${pillsId} .pp`);
-  const customInput = document.getElementById(customInputId);
+  function questionCard(q) {
+    const card = document.createElement('div');
+    card.className = 'question';
+    if (state.answers[q.id] && state.answers[q.id].trim()) card.classList.add('answered');
+    if (q.custom) card.classList.add('custom');
 
-  // Restore previously selected pill
-  const currentVal = state[stateKey];
-  let foundMatch = false;
-  pills.forEach(pill => {
-    const val = pill.getAttribute('data-val');
-    if (val === currentVal) {
-      pill.classList.add('active');
-      foundMatch = true;
-    }
-  });
-  // Custom case
-  if (!foundMatch && state[customStateKey]) {
-    pills.forEach(p => { if (p.getAttribute('data-val') === (pillsId === 'pronounPills' ? 'custom' : 'other')) p.classList.add('active'); });
-    customInput.style.display = 'block';
-    customInput.value = state[customStateKey];
-  }
+    const isAnswered = state.answers[q.id] && state.answers[q.id].trim();
+    const isSkipped = state.skipped[q.id];
 
-  pills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      const val = pill.getAttribute('data-val');
-      pills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
+    let badge = '';
+    if (q.custom) badge = '<span class="q-badge custom">Custom</span>';
+    else if (isAnswered) badge = '<span class="q-badge answered">Answered ♡</span>';
 
-      if (val === 'custom' || val === 'other') {
-        customInput.style.display = 'block';
-        customInput.focus();
-        state[stateKey] = val;
+    const deleteBtn = q.custom
+      ? `<button class="q-delete" title="Remove" data-id="${q.id}">✕</button>`
+      : '';
+
+    card.innerHTML = `
+      <div class="q-head">
+        <div class="q-text">${escapeHtml(q.q)}</div>
+        <div style="display:flex; gap:6px; align-items:flex-start;">
+          ${badge}
+          ${deleteBtn}
+        </div>
+      </div>
+      <textarea
+        class="q-answer"
+        data-id="${q.id}"
+        placeholder="your answer..."
+        rows="1"
+      >${escapeHtml(state.answers[q.id] || '')}</textarea>
+      <button class="q-skip ${isSkipped ? 'skipped' : ''}" data-id="${q.id}">
+        ${isSkipped ? 'rather not say ✓' : "i'd rather not say"}
+      </button>
+    `;
+
+    const ta = card.querySelector('textarea');
+    ta.addEventListener('input', (e) => {
+      state.answers[q.id] = e.target.value;
+      autoResize(e.target);
+      if (e.target.value.trim()) {
+        delete state.skipped[q.id];
+        if (!card.classList.contains('answered')) card.classList.add('answered');
       } else {
-        customInput.style.display = 'none';
-        customInput.value = '';
-        state[stateKey] = val;
-        state[customStateKey] = '';
+        card.classList.remove('answered');
       }
       saveState();
-      // Update category suggestions if gender changed
-      if (stateKey === 'gender') renderCategories();
+      updateProgress();
+      updateBadge(card, q.id, q.custom);
     });
-  });
+    // Initial auto-resize
+    setTimeout(() => autoResize(ta), 10);
 
-  customInput.addEventListener('input', (e) => {
-    state[customStateKey] = e.target.value;
-    saveState();
-  });
-}
-
-/* Apply theme to body via data attribute */
-function applyTheme(theme) {
-  if (theme === 'pink') {
-    document.body.removeAttribute('data-theme');
-  } else {
-    document.body.setAttribute('data-theme', theme);
-  }
-  document.querySelectorAll('.theme-btn').forEach(b => {
-    b.classList.toggle('active', b.getAttribute('data-theme') === theme);
-  });
-}
-
-/* ======================================================================
-   STATE PERSISTENCE
-   ----------------------------------------------------------------------
-   This app is intentionally one-time-use: nothing is saved to the
-   browser. The only ways to keep your answers are (1) Copy Link —
-   which encodes everything into a URL, or (2) Download PDF.
-
-   These functions are kept as no-ops so the rest of the code can still
-   call them harmlessly. The hash-loading flow in init() is the one
-   exception — that's how shared links re-populate the page.
-   ====================================================================== */
-function saveState() { /* no-op — see comment above */ }
-function loadState() { /* no-op — see comment above */ }
-
-/* ======================================================================
-   RENDER: Categories
-   ====================================================================== */
-function renderCategories() {
-  const root = document.getElementById('categories');
-  root.innerHTML = '';
-
-  // Figure out which "vibe-coded" category to suggest based on gender
-  const suggestedCat = getSuggestedCategory();
-
-  CATEGORIES.forEach(c => {
-    // Hide the "Custom" filter until the user adds at least one
-    if (c.key === 'custom' && state.custom.length === 0) return;
-
-    const btn = document.createElement('button');
-    btn.className = 'cat-btn' + (state.activeCat === c.key ? ' active' : '');
-    if (c.key === suggestedCat) btn.classList.add('suggested');
-
-    const count = c.key === 'all'
-      ? QUESTION_BANK.length + state.custom.length
-      : (c.key === 'custom' ? state.custom.length : QUESTION_BANK.filter(q => q.cat === c.key).length);
-
-    const star = (c.key === suggestedCat) ? '<span class="star" title="Suggested for you">⭐</span>' : '';
-    btn.innerHTML = `${c.label}${star} <span class="count">${count}</span>`;
-    btn.onclick = () => {
-      state.activeCat = c.key;
-      renderCategories();
-      renderQuestions();
-    };
-    root.appendChild(btn);
-  });
-}
-
-function getSuggestedCategory() {
-  const g = (state.gender || '').toLowerCase();
-  if (g === 'man') return 'bro';
-  if (g === 'woman') return 'girly';
-  if (g === 'non-binary') return 'queer';
-  // For 'other' / custom: don't suggest, let them browse
-  return null;
-}
-
-/* ======================================================================
-   RENDER: Questions
-   ====================================================================== */
-function getAllQuestions() {
-  const banked = QUESTION_BANK.map((q, i) => ({ id: `b${i}`, q: q.q, cat: q.cat, custom: false }));
-  const custom = state.custom.map(c => ({ id: c.id, q: c.q, cat: 'custom', custom: true }));
-  return [...banked, ...custom];
-}
-
-function renderQuestions() {
-  const root = document.getElementById('questions');
-  root.innerHTML = '';
-
-  let questions = getAllQuestions();
-  if (state.activeCat !== 'all') {
-    questions = questions.filter(q => q.cat === state.activeCat);
-  }
-
-  if (questions.length === 0) {
-    root.innerHTML = '<div class="empty">Nothing here yet ~ try another category</div>';
-    return;
-  }
-
-  const AD_INTERVAL = 5; // one ad every 5 questions
-  questions.forEach((q, i) => {
-    root.appendChild(questionCard(q));
-    // After every 8th question (but not the very last one)
-    if ((i + 1) % AD_INTERVAL === 0 && i !== questions.length - 1) {
-      root.appendChild(adSlot(Math.floor(i / AD_INTERVAL)));
-    }
-  });
-}
-
-/* ============================================
-   AD SLOT
-   ============================================
-   These are placeholder test ads. To connect real ads:
-
-   1. Replace the adSlot() function below with a container that has
-      your AdSense/AdSense-alt code inside.
-   2. For Google AdSense, replace the .ad-content innerHTML with:
-      <ins class="adsbygoogle"
-           style="display:block"
-           data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-           data-ad-slot="YYYYYYYYYY"
-           data-ad-format="fluid"
-           data-ad-layout-key="-XX-YY+ZZ"></ins>
-      Then trigger (adsbygoogle=window.adsbygoogle||[]).push({}) after
-      each slot is inserted.
-   3. Approval note: AdSense typically requires the site be live on a
-      real domain with some traffic before approval.
-   ============================================ */
-const TEST_ADS = [
-  {
-    icon: '💅',
-    title: 'Look your best for date night',
-    desc: 'Nail salons near you · Book in 30 seconds',
-    cta: 'Find salons',
-  },
-  {
-    icon: '🌸',
-    title: 'Bloom & Co. Flowers',
-    desc: 'Same-day bouquet delivery in your city',
-    cta: 'Send flowers',
-  },
-  {
-    icon: '☕',
-    title: 'First date? We know the vibe.',
-    desc: 'Cozy coffee spots rated by the community',
-    cta: 'Explore',
-  },
-  {
-    icon: '💬',
-    title: 'Journal your way through it',
-    desc: 'A dating-diary app for talking-stage survivors',
-    cta: 'Try free',
-  },
-  {
-    icon: '🎀',
-    title: 'Glossy — cute stationery',
-    desc: 'Notebooks, pens, and desk things that spark joy',
-    cta: 'Shop',
-  },
-  {
-    icon: '🌿',
-    title: 'Therapy that actually fits',
-    desc: 'Talk to a licensed therapist from your couch',
-    cta: 'Get matched',
-  },
-];
-
-function adSlot(index = 0) {
-  const ad = TEST_ADS[index % TEST_ADS.length];
-  const wrap = document.createElement('div');
-  wrap.className = 'ad-slot';
-  wrap.setAttribute('data-ad-index', index);
-  wrap.innerHTML = `
-    <div class="ad-label">
-      <span class="tag-left">♡ Sponsored</span>
-      <span class="tag-right">Ad</span>
-    </div>
-    <div class="ad-content">
-      <div class="ad-placeholder-icon">${ad.icon}</div>
-      <div class="ad-placeholder-text">
-        <div class="ad-placeholder-title">${ad.title}</div>
-        <div class="ad-placeholder-desc">${ad.desc}</div>
-      </div>
-      <div class="ad-placeholder-cta">${ad.cta}</div>
-    </div>
-  `;
-  return wrap;
-}
-
-function questionCard(q) {
-  const card = document.createElement('div');
-  card.className = 'question';
-  if (state.answers[q.id] && state.answers[q.id].trim()) card.classList.add('answered');
-  if (q.custom) card.classList.add('custom');
-
-  const isAnswered = state.answers[q.id] && state.answers[q.id].trim();
-  const isSkipped = state.skipped[q.id];
-
-  let badge = '';
-  if (q.custom) badge = '<span class="q-badge custom">Custom</span>';
-  else if (isAnswered) badge = '<span class="q-badge answered">Answered ♡</span>';
-
-  const deleteBtn = q.custom
-    ? `<button class="q-delete" title="Remove" data-id="${q.id}">✕</button>`
-    : '';
-
-  card.innerHTML = `
-    <div class="q-head">
-      <div class="q-text">${escapeHtml(q.q)}</div>
-      <div style="display:flex; gap:6px; align-items:flex-start;">
-        ${badge}
-        ${deleteBtn}
-      </div>
-    </div>
-    <textarea
-      class="q-answer"
-      data-id="${q.id}"
-      placeholder="your answer..."
-      rows="1"
-    >${escapeHtml(state.answers[q.id] || '')}</textarea>
-    <button class="q-skip ${isSkipped ? 'skipped' : ''}" data-id="${q.id}">
-      ${isSkipped ? 'rather not say ✓' : "i'd rather not say"}
-    </button>
-  `;
-
-  const ta = card.querySelector('textarea');
-  ta.addEventListener('input', (e) => {
-    state.answers[q.id] = e.target.value;
-    autoResize(e.target);
-    if (e.target.value.trim()) {
-      delete state.skipped[q.id];
-      if (!card.classList.contains('answered')) card.classList.add('answered');
-    } else {
-      card.classList.remove('answered');
-    }
-    saveState();
-    updateProgress();
-    updateBadge(card, q.id, q.custom);
-  });
-  // Initial auto-resize
-  setTimeout(() => autoResize(ta), 10);
-
-  const skip = card.querySelector('.q-skip');
-  skip.addEventListener('click', () => {
-    if (state.skipped[q.id]) {
-      delete state.skipped[q.id];
-    } else {
-      state.skipped[q.id] = true;
-      state.answers[q.id] = '';
-      ta.value = '';
-      card.classList.remove('answered');
-    }
-    saveState();
-    renderQuestions();
-    updateProgress();
-  });
-
-  if (q.custom) {
-    const del = card.querySelector('.q-delete');
-    del.addEventListener('click', () => {
-      if (confirm('Delete this question?')) {
-        state.custom = state.custom.filter(c => c.id !== q.id);
-        delete state.answers[q.id];
+    const skip = card.querySelector('.q-skip');
+    skip.addEventListener('click', () => {
+      if (state.skipped[q.id]) {
         delete state.skipped[q.id];
-        saveState();
-        renderQuestions();
-        renderCategories();
-        updateProgress();
+      } else {
+        state.skipped[q.id] = true;
+        state.answers[q.id] = '';
+        ta.value = '';
+        card.classList.remove('answered');
       }
+      saveState();
+      renderQuestions();
+      updateProgress();
     });
+
+    if (q.custom) {
+      const del = card.querySelector('.q-delete');
+      del.addEventListener('click', () => {
+        if (confirm('Delete this question?')) {
+          state.custom = state.custom.filter(c => c.id !== q.id);
+          delete state.answers[q.id];
+          delete state.skipped[q.id];
+          saveState();
+          renderQuestions();
+          renderCategories();
+          updateProgress();
+        }
+      });
+    }
+
+    return card;
   }
 
-  return card;
-}
+  function updateBadge(card, id, isCustom) {
+    const head = card.querySelector('.q-head > div:last-child');
+    const oldBadge = head.querySelector('.q-badge');
+    if (oldBadge) oldBadge.remove();
 
-function updateBadge(card, id, isCustom) {
-  const head = card.querySelector('.q-head > div:last-child');
-  const oldBadge = head.querySelector('.q-badge');
-  if (oldBadge) oldBadge.remove();
-
-  const answered = state.answers[id] && state.answers[id].trim();
-  if (isCustom) {
-    head.insertAdjacentHTML('afterbegin', '<span class="q-badge custom">Custom</span>');
-  } else if (answered) {
-    head.insertAdjacentHTML('afterbegin', '<span class="q-badge answered">Answered ♡</span>');
-  }
-}
-
-function autoResize(ta) {
-  ta.style.height = 'auto';
-  ta.style.height = (ta.scrollHeight) + 'px';
-}
-
-/* ======================================================================
-   RENDER: Add Custom Question
-   ====================================================================== */
-function renderAddCustom() {
-  const root = document.getElementById('addCustomArea');
-  root.innerHTML = `
-    <div class="add-custom" id="addCustomBtn">
-      <span class="plus">+</span>
-      <span class="text">Add your own question</span>
-      <span class="sub">Anything you wish people asked you</span>
-    </div>
-  `;
-  root.querySelector('#addCustomBtn').onclick = showAddForm;
-}
-
-function showAddForm() {
-  const root = document.getElementById('addCustomArea');
-  root.innerHTML = `
-    <div class="add-form">
-      <input type="text" id="newQ" placeholder="Type your question here..." maxlength="200">
-      <div class="actions">
-        <button class="cancel" id="cancelQ">Cancel</button>
-        <button class="save" id="saveQ">Add question</button>
-      </div>
-    </div>
-  `;
-  const input = root.querySelector('#newQ');
-  input.focus();
-  input.addEventListener('keydown', (e) => {
-    if (e.key === 'Enter') saveCustom();
-    if (e.key === 'Escape') renderAddCustom();
-  });
-  root.querySelector('#cancelQ').onclick = renderAddCustom;
-  root.querySelector('#saveQ').onclick = saveCustom;
-}
-
-function saveCustom() {
-  const input = document.getElementById('newQ');
-  const val = input.value.trim();
-  if (!val) return;
-  const id = 'c' + Date.now();
-  state.custom.push({ id, q: val });
-  // Jump to the Custom filter so the new question is immediately visible & answerable
-  state.activeCat = 'custom';
-  renderCategories();
-  renderQuestions();
-  renderAddCustom();
-  showToast('Question added — answer it below ♡');
-}
-
-/* ======================================================================
-   PROGRESS
-   ====================================================================== */
-function updateProgress() {
-  const all = getAllQuestions();
-  const total = all.length;
-  const answered = all.filter(q => state.answers[q.id] && state.answers[q.id].trim()).length;
-  const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
-  document.getElementById('progressText').textContent = `${answered} of ${total} answered`;
-  document.getElementById('progressFill').style.width = percent + '%';
-}
-
-/* ======================================================================
-   PDF EXPORT
-   ====================================================================== */
-async function downloadPDF() {
-  // Fallback: if jsPDF didn't load (e.g. offline, no CDN), use browser print
-  if (!window.jspdf || !window.jspdf.jsPDF) {
-    showToast('Using your browser\'s print-to-PDF...');
-    setTimeout(() => window.print(), 600);
-    return;
-  }
-
-  const { jsPDF } = window.jspdf;
-  const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-
-  const pageW = doc.internal.pageSize.getWidth();
-  const pageH = doc.internal.pageSize.getHeight();
-  const margin = 56;
-  const contentW = pageW - margin * 2;
-  let y = margin;
-
-  const name = (state.name || 'Me').trim() || 'Me';
-  const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
-  const theme = state.theme || 'pink';
-
-  /* ---------- THEME PALETTES (RGB triples) ---------- */
-  // Mirrors the on-screen CSS variables so the PDF matches the preview
-  const themes = {
-    pink: {
-      heroFrom:    [255, 224, 234],   // pink-soft
-      heroTo:      [255, 228, 209],   // peach-soft
-      accent:      [255, 135, 168],   // pink
-      accent2:     [232,  82, 138],   // pink-2 — name + section labels
-      secondary:   [255, 176, 133],   // peach — rules
-      secondary2:  [240, 138,  85],   // peach-2 — tagline
-      bgTint:      [255, 250, 247],   // very light bg for content pages
-      ink:         [ 43,  29,  26],
-      ink2:        [ 91,  72,  67],
-      ink3:        [138, 116, 110],
-      ink4:        [184, 168, 163],
-      isPride:     false,
-    },
-    blue: {
-      heroFrom:    [221, 235, 245],   // blue-soft
-      heroTo:      [220, 234, 236],   // teal-soft
-      accent:      [ 79, 143, 191],
-      accent2:     [ 46, 106, 153],
-      secondary:   [107, 168, 176],
-      secondary2:  [ 77, 133, 140],
-      bgTint:      [248, 250, 252],
-      ink:         [ 21,  33,  43],
-      ink2:        [ 61,  79,  94],
-      ink3:        [107, 123, 137],
-      ink4:        [160, 174, 186],
-      isPride:     false,
-    },
-    pride: {
-      heroFrom:    [237, 222, 245],   // lavender-soft
-      heroTo:      [215, 238, 221],   // mint-soft
-      accent:      [176, 124, 216],   // lavender
-      accent2:     [128,  72, 176],   // lavender-2
-      secondary:   [ 93, 191, 181],   // mint
-      secondary2:  [ 61, 156, 146],
-      bgTint:      [251, 246, 255],
-      ink:         [ 37,  26,  46],
-      ink2:        [ 74,  62,  85],
-      ink3:        [120, 106, 130],
-      ink4:        [176, 164, 184],
-      isPride:     true,
-    },
-  };
-  const T = themes[theme] || themes.pink;
-
-  /* ---------- HELPERS ---------- */
-  // Linear horizontal-ish gradient via stacked rectangles
-  function drawGradient(x, y, w, h, c1, c2, steps = 60) {
-    const stripeW = w / steps;
-    for (let i = 0; i < steps; i++) {
-      const t = i / (steps - 1);
-      const r = Math.round(c1[0] + (c2[0] - c1[0]) * t);
-      const g = Math.round(c1[1] + (c2[1] - c1[1]) * t);
-      const b = Math.round(c1[2] + (c2[2] - c1[2]) * t);
-      doc.setFillColor(r, g, b);
-      doc.rect(x + i * stripeW, y, stripeW + 0.5, h, 'F');
+    const answered = state.answers[id] && state.answers[id].trim();
+    if (isCustom) {
+      head.insertAdjacentHTML('afterbegin', '<span class="q-badge custom">Custom</span>');
+    } else if (answered) {
+      head.insertAdjacentHTML('afterbegin', '<span class="q-badge answered">Answered ♡</span>');
     }
   }
 
-  // Pride rainbow strip (6 stripes)
-  function drawRainbow(x, y, w, h) {
-    const colors = [
-      [232,  82, 109], [232, 146,  61], [220, 184,  55],
-      [ 93, 191, 181], [ 79, 143, 191], [176, 124, 216],
-    ];
-    const stripeW = w / colors.length;
-    colors.forEach((c, i) => {
-      doc.setFillColor(...c);
-      doc.rect(x + i * stripeW, y, stripeW + 0.5, h, 'F');
+  function autoResize(ta) {
+    ta.style.height = 'auto';
+    ta.style.height = (ta.scrollHeight) + 'px';
+  }
+
+  /* ======================================================================
+     RENDER: Add Custom Question
+     ====================================================================== */
+  function renderAddCustom() {
+    const root = document.getElementById('addCustomArea');
+    root.innerHTML = `
+      <div class="add-custom" id="addCustomBtn">
+        <span class="plus">+</span>
+        <span class="text">Add your own question</span>
+        <span class="sub">Anything you wish people asked you</span>
+      </div>
+    `;
+    root.querySelector('#addCustomBtn').onclick = showAddForm;
+  }
+
+  function showAddForm() {
+    const root = document.getElementById('addCustomArea');
+    root.innerHTML = `
+      <div class="add-form">
+        <input type="text" id="newQ" placeholder="Type your question here..." maxlength="200">
+        <div class="actions">
+          <button class="cancel" id="cancelQ">Cancel</button>
+          <button class="save" id="saveQ">Add question</button>
+        </div>
+      </div>
+    `;
+    const input = root.querySelector('#newQ');
+    input.focus();
+    input.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') saveCustom();
+      if (e.key === 'Escape') renderAddCustom();
     });
+    root.querySelector('#cancelQ').onclick = renderAddCustom;
+    root.querySelector('#saveQ').onclick = saveCustom;
   }
 
-  // Sweet rounded heart (size = "radius")
-  function drawHeart(cx, cy, size, color) {
-    doc.setFillColor(...color);
-    doc.circle(cx - size * 0.55, cy - size * 0.15, size * 0.6, 'F');
-    doc.circle(cx + size * 0.55, cy - size * 0.15, size * 0.6, 'F');
-    doc.triangle(
-      cx - size * 1.15, cy + size * 0.12,
-      cx + size * 1.15, cy + size * 0.12,
-      cx,                cy + size * 1.45,
-      'F'
-    );
+  function saveCustom() {
+    const input = document.getElementById('newQ');
+    const val = input.value.trim();
+    if (!val) return;
+    const id = 'c' + Date.now();
+    state.custom.push({ id, q: val });
+    // Jump to the Custom filter so the new question is immediately visible & answerable
+    state.activeCat = 'custom';
+    renderCategories();
+    renderQuestions();
+    renderAddCustom();
+    showToast('Question added — answer it below ♡');
   }
 
-  // Tiny themed page-footer (date + branding)
-  function drawPageFooter() {
-    // accent dot
-    doc.setFillColor(...T.accent);
-    doc.circle(pageW/2 - 60, pageH - 33, 1.5, 'F');
-    doc.setFillColor(...T.secondary);
-    doc.circle(pageW/2 + 60, pageH - 33, 1.5, 'F');
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(9);
-    doc.setTextColor(...T.ink4);
-    doc.text(`${date}  ·  About Me Pls`, pageW/2, pageH - 30, { align: 'center' });
+  /* ======================================================================
+     PROGRESS
+     ====================================================================== */
+  function updateProgress() {
+    const all = getAllQuestions();
+    const total = all.length;
+    const answered = all.filter(q => state.answers[q.id] && state.answers[q.id].trim()).length;
+    const percent = total === 0 ? 0 : Math.round((answered / total) * 100);
+    document.getElementById('progressText').textContent = `${answered} of ${total} answered`;
+    document.getElementById('progressFill').style.width = percent + '%';
   }
 
-  /* ---------- COVER PAGE ---------- */
+  /* ======================================================================
+     PDF EXPORT
+     ====================================================================== */
+  async function downloadPDF() {
+    // Fallback: if jsPDF didn't load (e.g. offline, no CDN), use browser print
+    if (!window.jspdf || !window.jspdf.jsPDF) {
+      showToast('Using your browser\'s print-to-PDF...');
+      setTimeout(() => window.print(), 600);
+      return;
+    }
 
-  // Subtle background tint
-  doc.setFillColor(...T.bgTint);
-  doc.rect(0, 0, pageW, pageH, 'F');
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'pt', format: 'a4' });
 
-  // Hero band — gradient from heroFrom -> heroTo
-  const heroH = 280;
-  drawGradient(0, 0, pageW, heroH, T.heroFrom, T.heroTo);
+    const pageW = doc.internal.pageSize.getWidth();
+    const pageH = doc.internal.pageSize.getHeight();
+    const margin = 56;
+    const contentW = pageW - margin * 2;
+    let y = margin;
 
-  // Pride rainbow strip across the very top
-  if (T.isPride) {
-    drawRainbow(0, 0, pageW, 6);
-  }
+    const name = (state.name || 'Me').trim() || 'Me';
+    const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+    const theme = state.theme || 'pink';
 
-  // White "heart badge" disc
-  const heartCx = pageW / 2;
-  const heartCy = 80;
-  doc.setFillColor(255, 255, 255);
-  doc.circle(heartCx, heartCy, 28, 'F');
-  // Subtle border ring
-  doc.setDrawColor(...T.heroTo);
-  doc.setLineWidth(1.5);
-  doc.circle(heartCx, heartCy, 28, 'S');
-  // Heart inside
-  drawHeart(heartCx, heartCy + 3, 9, T.accent2);
+    /* ---------- THEME PALETTES (RGB triples) ---------- */
+    // Mirrors the on-screen CSS variables so the PDF matches the preview
+    const themes = {
+      pink: {
+        heroFrom:    [255, 224, 234],   // pink-soft
+        heroTo:      [255, 228, 209],   // peach-soft
+        accent:      [255, 135, 168],   // pink
+        accent2:     [232,  82, 138],   // pink-2 — name + section labels
+        secondary:   [255, 176, 133],   // peach — rules
+        secondary2:  [240, 138,  85],   // peach-2 — tagline
+        bgTint:      [255, 250, 247],   // very light bg for content pages
+        ink:         [ 43,  29,  26],
+        ink2:        [ 91,  72,  67],
+        ink3:        [138, 116, 110],
+        ink4:        [184, 168, 163],
+        isPride:     false,
+      },
+      blue: {
+        heroFrom:    [221, 235, 245],   // blue-soft
+        heroTo:      [220, 234, 236],   // teal-soft
+        accent:      [ 79, 143, 191],
+        accent2:     [ 46, 106, 153],
+        secondary:   [107, 168, 176],
+        secondary2:  [ 77, 133, 140],
+        bgTint:      [248, 250, 252],
+        ink:         [ 21,  33,  43],
+        ink2:        [ 61,  79,  94],
+        ink3:        [107, 123, 137],
+        ink4:        [160, 174, 186],
+        isPride:     false,
+      },
+      pride: {
+        heroFrom:    [237, 222, 245],   // lavender-soft
+        heroTo:      [215, 238, 221],   // mint-soft
+        accent:      [176, 124, 216],   // lavender
+        accent2:     [128,  72, 176],   // lavender-2
+        secondary:   [ 93, 191, 181],   // mint
+        secondary2:  [ 61, 156, 146],
+        bgTint:      [251, 246, 255],
+        ink:         [ 37,  26,  46],
+        ink2:        [ 74,  62,  85],
+        ink3:        [120, 106, 130],
+        ink4:        [176, 164, 184],
+        isPride:     true,
+      },
+    };
+    const T = themes[theme] || themes.pink;
 
-  // Eyebrow
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(...T.accent2);
-  doc.text('YOUR ANSWER SHEET', pageW / 2, heartCy + 50, {
-    align: 'center', charSpace: 1.6
-  });
+    /* ---------- HELPERS ---------- */
+    // Linear horizontal-ish gradient via stacked rectangles
+    function drawGradient(x, y, w, h, c1, c2, steps = 60) {
+      const stripeW = w / steps;
+      for (let i = 0; i < steps; i++) {
+        const t = i / (steps - 1);
+        const r = Math.round(c1[0] + (c2[0] - c1[0]) * t);
+        const g = Math.round(c1[1] + (c2[1] - c1[1]) * t);
+        const b = Math.round(c1[2] + (c2[2] - c1[2]) * t);
+        doc.setFillColor(r, g, b);
+        doc.rect(x + i * stripeW, y, stripeW + 0.5, h, 'F');
+      }
+    }
 
-  // Big "about [Name]" headline — italic for the word, bold for the name
-  doc.setFont('times', 'italic');
-  doc.setFontSize(28);
-  doc.setTextColor(...T.ink);
-  doc.text('about', pageW / 2, heartCy + 92, { align: 'center' });
+    // Pride rainbow strip (6 stripes)
+    function drawRainbow(x, y, w, h) {
+      const colors = [
+        [232,  82, 109], [232, 146,  61], [220, 184,  55],
+        [ 93, 191, 181], [ 79, 143, 191], [176, 124, 216],
+      ];
+      const stripeW = w / colors.length;
+      colors.forEach((c, i) => {
+        doc.setFillColor(...c);
+        doc.rect(x + i * stripeW, y, stripeW + 0.5, h, 'F');
+      });
+    }
 
-  doc.setFont('times', 'bolditalic');
-  doc.setFontSize(48);
-  doc.setTextColor(...T.accent2);
-  doc.text(name, pageW / 2, heartCy + 145, { align: 'center' });
+    // Sweet rounded heart (size = "radius")
+    function drawHeart(cx, cy, size, color) {
+      doc.setFillColor(...color);
+      doc.circle(cx - size * 0.55, cy - size * 0.15, size * 0.6, 'F');
+      doc.circle(cx + size * 0.55, cy - size * 0.15, size * 0.6, 'F');
+      doc.triangle(
+        cx - size * 1.15, cy + size * 0.12,
+        cx + size * 1.15, cy + size * 0.12,
+        cx,                cy + size * 1.45,
+        'F'
+      );
+    }
 
-  // Identity line
-  const finalPronouns = state.pronouns === 'custom' ? state.pronounsCustom : state.pronouns;
-  const finalGender = state.gender === 'other' ? state.genderCustom : state.gender;
-  const idParts = [];
-  if (finalPronouns && finalPronouns.trim()) idParts.push(finalPronouns.trim());
-  if (finalGender && finalGender.trim()) idParts.push(finalGender.trim());
-  const idLine = idParts.join('  ·  ');
+    // Tiny themed page-footer (date + branding)
+    function drawPageFooter() {
+      // accent dot
+      doc.setFillColor(...T.accent);
+      doc.circle(pageW/2 - 60, pageH - 33, 1.5, 'F');
+      doc.setFillColor(...T.secondary);
+      doc.circle(pageW/2 + 60, pageH - 33, 1.5, 'F');
 
-  let coverY = heroH + 30;
-  if (idLine) {
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(12);
-    doc.setTextColor(...T.ink2);
-    doc.text(idLine, pageW / 2, coverY, { align: 'center' });
-    coverY += 24;
-  }
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(9);
+      doc.setTextColor(...T.ink4);
+      doc.text(`${date}  ·  About Me Pls`, pageW/2, pageH - 30, { align: 'center' });
+    }
 
-  // Tagline (script-y feel — closest jsPDF can do is times italic)
-  doc.setFont('times', 'italic');
-  doc.setFontSize(15);
-  doc.setTextColor(...T.secondary2);
-  doc.text("here's everything — before you ask.", pageW / 2, coverY + 8, { align: 'center' });
-  coverY += 36;
+    /* ---------- COVER PAGE ---------- */
 
-  // Decorative dotted divider
-  doc.setDrawColor(...T.secondary);
-  doc.setLineWidth(1);
-  if (typeof doc.setLineDashPattern === 'function') {
-    doc.setLineDashPattern([2, 4], 0);
-  }
-  doc.line(margin + 80, coverY + 18, pageW - margin - 80, coverY + 18);
-  if (typeof doc.setLineDashPattern === 'function') {
-    doc.setLineDashPattern([], 0);
-  }
-
-  y = coverY + 50;
-
-  /* ---------- ANSWERS ---------- */
-  const all = getAllQuestions();
-  const catLabels = {
-    basics: 'Basics', vibes: 'Vibes', favs: 'Favorites',
-    love: 'Love', identity: 'Identity', bro: 'Bro Stuff',
-    girly: 'Girly Things', queer: 'Queer Life', deep: 'Deeper',
-    fun: 'Fun', spicy: 'Spicy', custom: 'My own questions',
-  };
-
-  const byCat = {};
-  all.forEach(q => {
-    const ans = (state.answers[q.id] || '').trim();
-    if (!ans) return;
-    if (!byCat[q.cat]) byCat[q.cat] = [];
-    byCat[q.cat].push({ ...q, answer: ans });
-  });
-  const catOrder = ['basics','vibes','favs','love','identity','bro','girly','queer','deep','fun','spicy','custom'];
-
-  // Track current page so we can paint the bg tint when adding pages
-  const paintPageBg = () => {
+    // Subtle background tint
     doc.setFillColor(...T.bgTint);
     doc.rect(0, 0, pageW, pageH, 'F');
-    if (T.isPride) drawRainbow(0, 0, pageW, 4);
-  };
 
-  const checkPageBreak = (needed) => {
-    if (y + needed > pageH - margin - 20) {
-      drawPageFooter();
-      doc.addPage();
-      paintPageBg();
-      y = margin;
+    // Hero band — gradient from heroFrom -> heroTo
+    const heroH = 280;
+    drawGradient(0, 0, pageW, heroH, T.heroFrom, T.heroTo);
+
+    // Pride rainbow strip across the very top
+    if (T.isPride) {
+      drawRainbow(0, 0, pageW, 6);
     }
-  };
 
-  let anyAnswered = false;
-  catOrder.forEach(catKey => {
-    if (!byCat[catKey] || byCat[catKey].length === 0) return;
-    anyAnswered = true;
+    // White "heart badge" disc
+    const heartCx = pageW / 2;
+    const heartCy = 80;
+    doc.setFillColor(255, 255, 255);
+    doc.circle(heartCx, heartCy, 28, 'F');
+    // Subtle border ring
+    doc.setDrawColor(...T.heroTo);
+    doc.setLineWidth(1.5);
+    doc.circle(heartCx, heartCy, 28, 'S');
+    // Heart inside
+    drawHeart(heartCx, heartCy + 3, 9, T.accent2);
 
-    checkPageBreak(80);
-
-    // Italic serif category header — color matches accent2
-    doc.setFont('times', 'bolditalic');
-    doc.setFontSize(24);
+    // Eyebrow
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
     doc.setTextColor(...T.accent2);
-    doc.text(catLabels[catKey] || catKey, margin, y);
-    y += 6;
-
-    // Themed accent rule beneath label
-    doc.setDrawColor(...T.secondary);
-    doc.setLineWidth(2);
-    doc.line(margin, y + 6, margin + 70, y + 6);
-    y += 30;
-
-    byCat[catKey].forEach((item, idx) => {
-      // Question — italic serif, smaller, ink2 color
-      doc.setFont('times', 'italic');
-      doc.setFontSize(13);
-      doc.setTextColor(...T.ink2);
-      const qLines = doc.splitTextToSize(item.q, contentW);
-      checkPageBreak(qLines.length * 16 + 60);
-      doc.text(qLines, margin, y);
-      y += qLines.length * 16 + 6;
-
-      // Answer — clean sans, dark ink
-      doc.setFont('helvetica', 'normal');
-      doc.setFontSize(11.5);
-      doc.setTextColor(...T.ink);
-      const aLines = doc.splitTextToSize(item.answer, contentW);
-      checkPageBreak(aLines.length * 15 + 24);
-      doc.text(aLines, margin, y);
-      y += aLines.length * 15 + 14;
-
-      // Subtle dashed separator between Q/A pairs (except after last)
-      if (idx < byCat[catKey].length - 1) {
-        doc.setDrawColor(...T.ink4);
-        doc.setLineWidth(0.5);
-        if (typeof doc.setLineDashPattern === 'function') {
-          doc.setLineDashPattern([2, 3], 0);
-        }
-        doc.line(margin, y - 5, margin + contentW, y - 5);
-        if (typeof doc.setLineDashPattern === 'function') {
-          doc.setLineDashPattern([], 0);
-        }
-        y += 10;
-      }
+    doc.text('YOUR ANSWER SHEET', pageW / 2, heartCy + 50, {
+      align: 'center', charSpace: 1.6
     });
 
-    y += 22; // breathing room before next category
-  });
+    // Big "about [Name]" headline — italic for the word, bold for the name
+    doc.setFont('times', 'italic');
+    doc.setFontSize(28);
+    doc.setTextColor(...T.ink);
+    doc.text('about', pageW / 2, heartCy + 92, { align: 'center' });
 
-  if (!anyAnswered) {
+    doc.setFont('times', 'bolditalic');
+    doc.setFontSize(48);
+    doc.setTextColor(...T.accent2);
+    doc.text(name, pageW / 2, heartCy + 145, { align: 'center' });
+
+    // Identity line
+    const finalPronouns = state.pronouns === 'custom' ? state.pronounsCustom : state.pronouns;
+    const finalGender = state.gender === 'other' ? state.genderCustom : state.gender;
+    const idParts = [];
+    if (finalPronouns && finalPronouns.trim()) idParts.push(finalPronouns.trim());
+    if (finalGender && finalGender.trim()) idParts.push(finalGender.trim());
+    const idLine = idParts.join('  ·  ');
+
+    let coverY = heroH + 30;
+    if (idLine) {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(12);
+      doc.setTextColor(...T.ink2);
+      doc.text(idLine, pageW / 2, coverY, { align: 'center' });
+      coverY += 24;
+    }
+
+    // Tagline (script-y feel — closest jsPDF can do is times italic)
     doc.setFont('times', 'italic');
     doc.setFontSize(15);
-    doc.setTextColor(...T.ink3);
-    doc.text("(no answers yet — go back and fill some in)", pageW / 2, y + 50, { align: 'center' });
+    doc.setTextColor(...T.secondary2);
+    doc.text("here's everything — before you ask.", pageW / 2, coverY + 8, { align: 'center' });
+    coverY += 36;
+
+    // Decorative dotted divider
+    doc.setDrawColor(...T.secondary);
+    doc.setLineWidth(1);
+    if (typeof doc.setLineDashPattern === 'function') {
+      doc.setLineDashPattern([2, 4], 0);
+    }
+    doc.line(margin + 80, coverY + 18, pageW - margin - 80, coverY + 18);
+    if (typeof doc.setLineDashPattern === 'function') {
+      doc.setLineDashPattern([], 0);
+    }
+
+    y = coverY + 50;
+
+    /* ---------- ANSWERS ---------- */
+    const all = getAllQuestions();
+    const catLabels = {
+      basics: 'Basics', vibes: 'Vibes', favs: 'Favorites',
+      love: 'Love', identity: 'Identity', bro: 'Bro Stuff',
+      girly: 'Girly Things', queer: 'Queer Life', deep: 'Deeper',
+      fun: 'Fun', spicy: 'Spicy', custom: 'My own questions',
+    };
+
+    const byCat = {};
+    all.forEach(q => {
+      const ans = (state.answers[q.id] || '').trim();
+      if (!ans) return;
+      if (!byCat[q.cat]) byCat[q.cat] = [];
+      byCat[q.cat].push({ ...q, answer: ans });
+    });
+    const catOrder = ['basics','vibes','favs','love','identity','bro','girly','queer','deep','fun','spicy','custom'];
+
+    // Track current page so we can paint the bg tint when adding pages
+    const paintPageBg = () => {
+      doc.setFillColor(...T.bgTint);
+      doc.rect(0, 0, pageW, pageH, 'F');
+      if (T.isPride) drawRainbow(0, 0, pageW, 4);
+    };
+
+    const checkPageBreak = (needed) => {
+      if (y + needed > pageH - margin - 20) {
+        drawPageFooter();
+        doc.addPage();
+        paintPageBg();
+        y = margin;
+      }
+    };
+
+    let anyAnswered = false;
+    catOrder.forEach(catKey => {
+      if (!byCat[catKey] || byCat[catKey].length === 0) return;
+      anyAnswered = true;
+
+      checkPageBreak(80);
+
+      // Italic serif category header — color matches accent2
+      doc.setFont('times', 'bolditalic');
+      doc.setFontSize(24);
+      doc.setTextColor(...T.accent2);
+      doc.text(catLabels[catKey] || catKey, margin, y);
+      y += 6;
+
+      // Themed accent rule beneath label
+      doc.setDrawColor(...T.secondary);
+      doc.setLineWidth(2);
+      doc.line(margin, y + 6, margin + 70, y + 6);
+      y += 30;
+
+      byCat[catKey].forEach((item, idx) => {
+        // Question — italic serif, smaller, ink2 color
+        doc.setFont('times', 'italic');
+        doc.setFontSize(13);
+        doc.setTextColor(...T.ink2);
+        const qLines = doc.splitTextToSize(item.q, contentW);
+        checkPageBreak(qLines.length * 16 + 60);
+        doc.text(qLines, margin, y);
+        y += qLines.length * 16 + 6;
+
+        // Answer — clean sans, dark ink
+        doc.setFont('helvetica', 'normal');
+        doc.setFontSize(11.5);
+        doc.setTextColor(...T.ink);
+        const aLines = doc.splitTextToSize(item.answer, contentW);
+        checkPageBreak(aLines.length * 15 + 24);
+        doc.text(aLines, margin, y);
+        y += aLines.length * 15 + 14;
+
+        // Subtle dashed separator between Q/A pairs (except after last)
+        if (idx < byCat[catKey].length - 1) {
+          doc.setDrawColor(...T.ink4);
+          doc.setLineWidth(0.5);
+          if (typeof doc.setLineDashPattern === 'function') {
+            doc.setLineDashPattern([2, 3], 0);
+          }
+          doc.line(margin, y - 5, margin + contentW, y - 5);
+          if (typeof doc.setLineDashPattern === 'function') {
+            doc.setLineDashPattern([], 0);
+          }
+          y += 10;
+        }
+      });
+
+      y += 22; // breathing room before next category
+    });
+
+    if (!anyAnswered) {
+      doc.setFont('times', 'italic');
+      doc.setFontSize(15);
+      doc.setTextColor(...T.ink3);
+      doc.text("(no answers yet — go back and fill some in)", pageW / 2, y + 50, { align: 'center' });
+    }
+
+    // Footer on the final page
+    drawPageFooter();
+
+    const filename = `${name.replace(/[^a-z0-9]/gi, '_')}_aboutmepls.pdf`;
+    doc.save(filename);
+    showToast('PDF downloaded ♡');
   }
 
-  // Footer on the final page
-  drawPageFooter();
+  /* ======================================================================
+     UTILS
+     ====================================================================== */
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.classList.remove('show'), 2200);
+  }
 
-  const filename = `${name.replace(/[^a-z0-9]/gi, '_')}_aboutmepls.pdf`;
-  doc.save(filename);
-  showToast('PDF downloaded ♡');
-}
+  function escapeHtml(str) {
+    const div = document.createElement('div');
+    div.textContent = str;
+    return div.innerHTML;
+  }
 
-/* ======================================================================
-   UTILS
-   ====================================================================== */
-function showToast(msg) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.classList.add('show');
-  clearTimeout(t._timer);
-  t._timer = setTimeout(() => t.classList.remove('show'), 2200);
-}
-
-function escapeHtml(str) {
-  const div = document.createElement('div');
-  div.textContent = str;
-  return div.innerHTML;
-}
-
-init();
+  init();
 </script>
 
 </body>
