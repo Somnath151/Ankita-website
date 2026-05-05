@@ -1005,6 +1005,328 @@
     .action-btn .full-label { display: none; }
     h1.brand { font-size: 42px; }
   }
+/* ============================================================
+   PREVIEW — full-screen answer sheet
+   ============================================================ */
+.preview-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: none;
+  overflow-y: auto;
+  background: var(--bg);
+  -webkit-overflow-scrolling: touch;
+}
+.preview-overlay.open {
+  display: block;
+  animation: preview-fade 0.25s ease;
+}
+@keyframes preview-fade {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+.preview-modal {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  background: var(--bg);
+}
+
+.preview-close {
+  position: fixed;
+  top: 18px;
+  right: 18px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--white);
+  color: var(--ink-2);
+  font-size: 17px;
+  cursor: pointer;
+  z-index: 220;
+  box-shadow: 0 4px 14px rgba(43, 29, 26, 0.12);
+  transition: all 0.2s ease;
+}
+.preview-close:hover {
+  background: var(--ink);
+  color: var(--white);
+  transform: rotate(90deg) scale(1.05);
+}
+
+/* HERO */
+.preview-hero {
+  position: relative;
+  padding: 80px 24px 56px;
+  background: linear-gradient(135deg, var(--pink-soft), var(--peach-soft) 60%, var(--lavender-soft));
+  overflow: hidden;
+}
+.preview-hero::before,
+.preview-hero::after {
+  content: "";
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.55;
+  pointer-events: none;
+}
+.preview-hero::before {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, var(--pink), transparent 70%);
+  top: -120px; left: -80px;
+}
+.preview-hero::after {
+  width: 320px; height: 320px;
+  background: radial-gradient(circle, var(--lavender), transparent 70%);
+  bottom: -120px; right: -80px;
+}
+[data-theme="pride"] .preview-hero {
+  background: linear-gradient(135deg, var(--lavender-soft), var(--mint-soft) 50%, var(--peach-soft));
+}
+[data-theme="pride"] .preview-hero-rainbow {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 6px;
+  background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
+  z-index: 2;
+}
+.preview-hero-rainbow { display: none; }
+[data-theme="pride"] .preview-hero-rainbow { display: block; }
+
+.preview-hero-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.preview-hero-heart {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--white);
+  border-radius: 50%;
+  box-shadow: 0 6px 20px rgba(232, 82, 138, 0.22);
+}
+.preview-hero-heart svg {
+  width: 32px;
+  height: 32px;
+  color: var(--pink-2);
+  fill: currentColor;
+}
+[data-theme="pride"] .preview-hero-heart svg {
+  color: var(--lavender-2);
+}
+
+.preview-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--pink-2);
+  margin-bottom: 16px;
+}
+.preview-name {
+  font-family: var(--serif);
+  font-size: clamp(40px, 7vw, 64px);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  color: var(--ink);
+  margin: 0 0 14px;
+  font-variation-settings: "opsz" 144, "SOFT" 80;
+}
+.preview-name em {
+  font-style: italic;
+  color: var(--pink-2);
+  font-variation-settings: "opsz" 144, "SOFT" 100;
+}
+[data-theme="pride"] .preview-name em {
+  background: linear-gradient(90deg, #E8526D, #E8923D, #DCB837, #5DBFB5, #4F8FBF, #B07CD8);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+.preview-id-line {
+  font-size: 14px;
+  color: var(--ink-2);
+  font-family: var(--sans);
+  font-weight: 500;
+  margin-bottom: 16px;
+}
+.preview-tagline {
+  font-family: var(--script);
+  font-size: 22px;
+  color: var(--peach-2);
+  margin-top: 6px;
+}
+
+/* ACTION BAR */
+.preview-actions {
+  background: var(--white);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 16px 24px;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgba(255, 255, 255, 0.94);
+}
+.preview-actions-inner {
+  max-width: 720px;
+  margin: 0 auto;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.preview-action-btn {
+  flex: 1;
+  min-width: 130px;
+  padding: 12px 18px;
+  border-radius: 12px;
+  border: 1.5px solid var(--border);
+  background: var(--white);
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-2);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.preview-action-btn:hover {
+  border-color: var(--pink);
+  color: var(--pink-2);
+  transform: translateY(-1px);
+}
+.preview-action-btn.primary {
+  background: linear-gradient(135deg, var(--pink), var(--pink-2));
+  color: white;
+  border-color: transparent;
+  box-shadow: 0 4px 14px rgba(232, 82, 138, 0.32);
+}
+.preview-action-btn.primary:hover {
+  color: white;
+  box-shadow: 0 6px 20px rgba(232, 82, 138, 0.42);
+}
+[data-theme="pride"] .preview-action-btn.primary {
+  background: linear-gradient(135deg, #B07CD8, #5DBFB5, #E8923D);
+}
+
+/* CONTENT */
+.preview-content {
+  padding: 56px 24px 40px;
+}
+.preview-content-inner {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.preview-cat {
+  margin-bottom: 44px;
+}
+.preview-cat-label {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--pink-2);
+  margin: 0 0 8px;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 60, "SOFT" 100;
+}
+[data-theme="pride"] .preview-cat-label {
+  color: var(--lavender-2);
+}
+.preview-cat-rule {
+  width: 70px;
+  height: 2px;
+  background: var(--peach);
+  margin: 0 0 24px;
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.preview-qa {
+  margin-bottom: 22px;
+  padding-bottom: 20px;
+  border-bottom: 1px dashed var(--border);
+}
+.preview-qa:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+.preview-q {
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 16px;
+  color: var(--ink-2);
+  line-height: 1.4;
+  margin: 0 0 8px;
+  font-variation-settings: "opsz" 24, "SOFT" 70;
+}
+.preview-a {
+  font-family: var(--sans);
+  font-size: 16px;
+  color: var(--ink);
+  line-height: 1.6;
+  white-space: pre-wrap;
+  margin: 0;
+}
+
+.preview-empty {
+  text-align: center;
+  padding: 80px 20px;
+  color: var(--ink-3);
+  font-family: var(--serif);
+  font-style: italic;
+  font-size: 19px;
+}
+
+/* FOOTER */
+.preview-footer {
+  text-align: center;
+  padding: 30px 20px 60px;
+  font-size: 13px;
+  color: var(--ink-3);
+  font-family: var(--sans);
+  border-top: 1px dashed var(--border);
+  margin: 0 24px;
+}
+.preview-footer em {
+  font-family: var(--script);
+  font-size: 18px;
+  color: var(--pink-2);
+  font-style: normal;
+  vertical-align: -1px;
+}
+
+@media (max-width: 540px) {
+  .preview-close { width: 36px; height: 36px; top: 12px; right: 12px; font-size: 14px; }
+  .preview-hero { padding: 60px 18px 40px; }
+  .preview-hero-heart { width: 54px; height: 54px; margin-bottom: 14px; }
+  .preview-hero-heart svg { width: 26px; height: 26px; }
+  .preview-actions { padding: 12px 16px; }
+  .preview-action-btn { font-size: 12px; padding: 10px 8px; min-width: 0; }
+  .preview-content { padding: 36px 18px 30px; }
+  .preview-cat { margin-bottom: 36px; }
+  .preview-cat-label { font-size: 24px; }
+  .preview-tagline { font-size: 19px; }
+}
+
 </style>
 </head>
 <body>
@@ -1017,9 +1339,10 @@
     <h1 class="brand">About Me, <em>Pls.</em></h1>
     <div class="tagline">here's everything — <span>before you ask.</span></div>
     <p class="intro">
-      Tired of typing "tell me about yourself" into the void? Same. Fill this out once,
-      download the PDF, send it to whoever's sliding into your DMs. Your answers stay
-      on your device only — nothing is ever uploaded.
+      Tired of typing "tell me about yourself" into the void? Same. Fill this out,
+      then either copy the link to your answers or download a PDF — that's how you keep them.
+      <strong>Heads up:</strong> nothing is saved automatically. Close the tab and your
+      answers are gone forever, so grab the link or PDF before you leave.
     </p>
   </div>
 
@@ -1099,31 +1422,75 @@
 
 <!-- Action bar -->
 <div class="action-bar">
-  <button class="action-btn secondary" id="copyLinkBtn" title="Copy a link to your answers (paste it in your bio)">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
-      <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
-    </svg>
-    <span class="full-label">Copy Link</span>
-  </button>
-  <button class="action-btn secondary" id="shareBtn" title="Share this app">
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="18" cy="5" r="3"/>
-      <circle cx="6" cy="12" r="3"/>
-      <circle cx="18" cy="19" r="3"/>
-      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
-      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
-    </svg>
-    <span class="full-label">Share</span>
-  </button>
-  <button class="action-btn primary" id="downloadBtn">
+  <button class="action-btn primary" id="viewAnswersBtn">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-      <polyline points="7 10 12 15 17 10"/>
-      <line x1="12" y1="15" x2="12" y2="3"/>
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
     </svg>
-    Download PDF
+    View answers
   </button>
+</div>
+
+<!-- Preview — full-screen answer sheet -->
+<div class="preview-overlay" id="previewOverlay" aria-hidden="true">
+  <div class="preview-modal" role="dialog" aria-modal="true" aria-labelledby="previewName">
+    <div class="preview-hero-rainbow"></div>
+    <button class="preview-close" id="previewClose" title="Back to questions" aria-label="Close preview">✕</button>
+
+    <div class="preview-hero">
+      <div class="preview-hero-inner">
+        <div class="preview-hero-heart">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 21s-7-4.35-7-10a4.5 4.5 0 018-2.83A4.5 4.5 0 0119 11c0 5.65-7 10-7 10z"/>
+          </svg>
+        </div>
+        <span class="preview-eyebrow">Your answer sheet</span>
+        <h2 class="preview-name" id="previewName">about <em>Me</em></h2>
+        <div class="preview-id-line" id="previewIdLine"></div>
+        <div class="preview-tagline">here's everything — before you ask.</div>
+      </div>
+    </div>
+
+    <div class="preview-actions">
+      <div class="preview-actions-inner">
+        <button class="preview-action-btn" id="previewCopyLinkBtn" title="Copy a link to your answers — paste it in your bio">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/>
+            <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+          </svg>
+          Copy link
+        </button>
+        <button class="preview-action-btn" id="previewShareBtn" title="Share this app or your link">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="18" cy="5" r="3"/>
+            <circle cx="6" cy="12" r="3"/>
+            <circle cx="18" cy="19" r="3"/>
+            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+          </svg>
+          Share
+        </button>
+        <button class="preview-action-btn primary" id="previewDownloadBtn" title="Download as PDF">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Download PDF
+        </button>
+      </div>
+    </div>
+
+    <div class="preview-content">
+      <div class="preview-content-inner" id="previewBody">
+        <!-- Filled by renderPreview() -->
+      </div>
+    </div>
+
+    <div class="preview-footer">
+      Made with <em>love</em> — About Me Pls
+    </div>
+  </div>
 </div>
 
 <!-- Toast -->
@@ -1274,6 +1641,7 @@ const CATEGORIES = [
   { key: 'deep',     label: '🕯️ Deeper'       },
   { key: 'fun',      label: '🍓 Fun'          },
   { key: 'spicy',    label: '🌶️ Spicy'        },
+  { key: 'custom',   label: '✏️ My questions' },
 ];
 
 /* ======================================================================
@@ -1414,14 +1782,122 @@ function init() {
     }
   });
 
-  document.getElementById('downloadBtn').addEventListener('click', downloadPDF);
-  document.getElementById('copyLinkBtn').addEventListener('click', copyShareLink);
-  document.getElementById('shareBtn').addEventListener('click', shareApp);
+  document.getElementById('viewAnswersBtn').addEventListener('click', openPreview);
+
+  // Preview modal buttons
+  document.getElementById('previewDownloadBtn').addEventListener('click', downloadPDF);
+  document.getElementById('previewCopyLinkBtn').addEventListener('click', copyShareLink);
+  document.getElementById('previewShareBtn').addEventListener('click', shareApp);
+  document.getElementById('previewClose').addEventListener('click', closePreview);
+  document.getElementById('previewOverlay').addEventListener('click', (e) => {
+    if (e.target.id === 'previewOverlay') closePreview();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && document.getElementById('previewOverlay').classList.contains('open')) {
+      closePreview();
+    }
+  });
+
   document.getElementById('resetBtn').addEventListener('click', () => {
     if (confirm('Clear all answers and start fresh?')) {
-      localStorage.removeItem(STORAGE_KEY);
+      // No persistence to clear — just reload to a clean in-memory state
       location.reload();
     }
+  });
+}
+
+/* ======================================================================
+   PREVIEW MODAL ("View answers")
+   ====================================================================== */
+function openPreview() {
+  renderPreview();
+  const overlay = document.getElementById('previewOverlay');
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  overlay.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closePreview() {
+  const overlay = document.getElementById('previewOverlay');
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+}
+
+const CAT_LABELS_PREVIEW = {
+  basics:   '🌷 Basics',
+  vibes:    '🌿 Vibes',
+  favs:     '🎀 Favorites',
+  love:     '💌 Love',
+  identity: '🏳️‍🌈 Identity',
+  bro:      '💪 Bro Stuff',
+  girly:    '💅 Girly Things',
+  queer:    '🌈 Queer Life',
+  deep:     '🕯️ Deeper',
+  fun:      '🍓 Fun',
+  spicy:    '🌶️ Spicy',
+  custom:   '✏️ My own questions',
+};
+const CAT_ORDER_PREVIEW = ['basics','vibes','favs','love','identity','bro','girly','queer','deep','fun','spicy','custom'];
+
+function renderPreview() {
+  const body = document.getElementById('previewBody');
+  body.innerHTML = '';
+
+  const name = (state.name || '').trim() || 'Me';
+  const finalPronouns = state.pronouns === 'custom' ? state.pronounsCustom : state.pronouns;
+  const finalGender = state.gender === 'other' ? state.genderCustom : state.gender;
+  const idParts = [];
+  if (finalPronouns && finalPronouns.trim()) idParts.push(finalPronouns.trim());
+  if (finalGender && finalGender.trim()) idParts.push(finalGender.trim());
+
+  // Populate hero name + id line
+  document.getElementById('previewName').innerHTML = `about <em>${escapeHtml(name)}</em>`;
+  const idEl = document.getElementById('previewIdLine');
+  if (idParts.length) {
+    idEl.textContent = idParts.join(' · ');
+    idEl.style.display = '';
+  } else {
+    idEl.style.display = 'none';
+  }
+
+  // Group answered questions by category
+  const all = getAllQuestions();
+  const byCat = {};
+  all.forEach(q => {
+    const ans = (state.answers[q.id] || '').trim();
+    if (!ans) return;
+    if (!byCat[q.cat]) byCat[q.cat] = [];
+    byCat[q.cat].push({ ...q, answer: ans });
+  });
+
+  if (Object.keys(byCat).length === 0) {
+    const empty = document.createElement('div');
+    empty.className = 'preview-empty';
+    empty.textContent = "(no answers yet — go back and fill some in ♡)";
+    body.appendChild(empty);
+    return;
+  }
+
+  CAT_ORDER_PREVIEW.forEach(catKey => {
+    if (!byCat[catKey] || byCat[catKey].length === 0) return;
+    const section = document.createElement('div');
+    section.className = 'preview-cat';
+    let html = `
+      <div class="preview-cat-label">${CAT_LABELS_PREVIEW[catKey] || catKey}</div>
+      <div class="preview-cat-rule"></div>
+    `;
+    byCat[catKey].forEach(item => {
+      html += `
+        <div class="preview-qa">
+          <p class="preview-q">${escapeHtml(item.q)}</p>
+          <p class="preview-a">${escapeHtml(item.answer)}</p>
+        </div>
+      `;
+    });
+    section.innerHTML = html;
+    body.appendChild(section);
   });
 }
 
@@ -1553,21 +2029,17 @@ function applyTheme(theme) {
 
 /* ======================================================================
    STATE PERSISTENCE
+   ----------------------------------------------------------------------
+   This app is intentionally one-time-use: nothing is saved to the
+   browser. The only ways to keep your answers are (1) Copy Link —
+   which encodes everything into a URL, or (2) Download PDF.
+
+   These functions are kept as no-ops so the rest of the code can still
+   call them harmlessly. The hash-loading flow in init() is the one
+   exception — that's how shared links re-populate the page.
    ====================================================================== */
-function saveState() {
-  try {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
-  } catch(e) { console.error(e); }
-}
-function loadState() {
-  try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      state = { ...state, ...parsed };
-    }
-  } catch(e) { console.error(e); }
-}
+function saveState() { /* no-op — see comment above */ }
+function loadState() { /* no-op — see comment above */ }
 
 /* ======================================================================
    RENDER: Categories
@@ -1580,6 +2052,9 @@ function renderCategories() {
   const suggestedCat = getSuggestedCategory();
 
   CATEGORIES.forEach(c => {
+    // Hide the "Custom" filter until the user adds at least one
+    if (c.key === 'custom' && state.custom.length === 0) return;
+
     const btn = document.createElement('button');
     btn.className = 'cat-btn' + (state.activeCat === c.key ? ' active' : '');
     if (c.key === suggestedCat) btn.classList.add('suggested');
@@ -1867,11 +2342,12 @@ function saveCustom() {
   if (!val) return;
   const id = 'c' + Date.now();
   state.custom.push({ id, q: val });
-  saveState();
+  // Jump to the Custom filter so the new question is immediately visible & answerable
+  state.activeCat = 'custom';
   renderCategories();
   renderQuestions();
   renderAddCustom();
-  showToast('Question added ♡');
+  showToast('Question added — answer it below ♡');
 }
 
 /* ======================================================================
@@ -1910,161 +2386,291 @@ async function downloadPDF() {
   const date = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
   const theme = state.theme || 'pink';
 
-  // Theme palette for PDF
+  /* ---------- THEME PALETTES (RGB triples) ---------- */
+  // Mirrors the on-screen CSS variables so the PDF matches the preview
   const themes = {
-    pink:  { bandBg: [255,224,234], heartFill: [232,82,138], titleColor: [232,82,138], subAccent: [255,176,133] },
-    blue:  { bandBg: [221,235,245], heartFill: [46,106,153],  titleColor: [46,106,153],  subAccent: [107,168,176] },
-    pride: { bandBg: [237,222,245], heartFill: [128,72,176],  titleColor: [128,72,176],  subAccent: [93,191,181] },
+    pink: {
+      heroFrom:    [255, 224, 234],   // pink-soft
+      heroTo:      [255, 228, 209],   // peach-soft
+      accent:      [255, 135, 168],   // pink
+      accent2:     [232,  82, 138],   // pink-2 — name + section labels
+      secondary:   [255, 176, 133],   // peach — rules
+      secondary2:  [240, 138,  85],   // peach-2 — tagline
+      bgTint:      [255, 250, 247],   // very light bg for content pages
+      ink:         [ 43,  29,  26],
+      ink2:        [ 91,  72,  67],
+      ink3:        [138, 116, 110],
+      ink4:        [184, 168, 163],
+      isPride:     false,
+    },
+    blue: {
+      heroFrom:    [221, 235, 245],   // blue-soft
+      heroTo:      [220, 234, 236],   // teal-soft
+      accent:      [ 79, 143, 191],
+      accent2:     [ 46, 106, 153],
+      secondary:   [107, 168, 176],
+      secondary2:  [ 77, 133, 140],
+      bgTint:      [248, 250, 252],
+      ink:         [ 21,  33,  43],
+      ink2:        [ 61,  79,  94],
+      ink3:        [107, 123, 137],
+      ink4:        [160, 174, 186],
+      isPride:     false,
+    },
+    pride: {
+      heroFrom:    [237, 222, 245],   // lavender-soft
+      heroTo:      [215, 238, 221],   // mint-soft
+      accent:      [176, 124, 216],   // lavender
+      accent2:     [128,  72, 176],   // lavender-2
+      secondary:   [ 93, 191, 181],   // mint
+      secondary2:  [ 61, 156, 146],
+      bgTint:      [251, 246, 255],
+      ink:         [ 37,  26,  46],
+      ink2:        [ 74,  62,  85],
+      ink3:        [120, 106, 130],
+      ink4:        [176, 164, 184],
+      isPride:     true,
+    },
   };
   const T = themes[theme] || themes.pink;
 
-  // Build pronouns/gender display string
+  /* ---------- HELPERS ---------- */
+  // Linear horizontal-ish gradient via stacked rectangles
+  function drawGradient(x, y, w, h, c1, c2, steps = 60) {
+    const stripeW = w / steps;
+    for (let i = 0; i < steps; i++) {
+      const t = i / (steps - 1);
+      const r = Math.round(c1[0] + (c2[0] - c1[0]) * t);
+      const g = Math.round(c1[1] + (c2[1] - c1[1]) * t);
+      const b = Math.round(c1[2] + (c2[2] - c1[2]) * t);
+      doc.setFillColor(r, g, b);
+      doc.rect(x + i * stripeW, y, stripeW + 0.5, h, 'F');
+    }
+  }
+
+  // Pride rainbow strip (6 stripes)
+  function drawRainbow(x, y, w, h) {
+    const colors = [
+      [232,  82, 109], [232, 146,  61], [220, 184,  55],
+      [ 93, 191, 181], [ 79, 143, 191], [176, 124, 216],
+    ];
+    const stripeW = w / colors.length;
+    colors.forEach((c, i) => {
+      doc.setFillColor(...c);
+      doc.rect(x + i * stripeW, y, stripeW + 0.5, h, 'F');
+    });
+  }
+
+  // Sweet rounded heart (size = "radius")
+  function drawHeart(cx, cy, size, color) {
+    doc.setFillColor(...color);
+    doc.circle(cx - size * 0.55, cy - size * 0.15, size * 0.6, 'F');
+    doc.circle(cx + size * 0.55, cy - size * 0.15, size * 0.6, 'F');
+    doc.triangle(
+      cx - size * 1.15, cy + size * 0.12,
+      cx + size * 1.15, cy + size * 0.12,
+      cx,                cy + size * 1.45,
+      'F'
+    );
+  }
+
+  // Tiny themed page-footer (date + branding)
+  function drawPageFooter() {
+    // accent dot
+    doc.setFillColor(...T.accent);
+    doc.circle(pageW/2 - 60, pageH - 33, 1.5, 'F');
+    doc.setFillColor(...T.secondary);
+    doc.circle(pageW/2 + 60, pageH - 33, 1.5, 'F');
+
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    doc.setTextColor(...T.ink4);
+    doc.text(`${date}  ·  About Me Pls`, pageW/2, pageH - 30, { align: 'center' });
+  }
+
+  /* ---------- COVER PAGE ---------- */
+
+  // Subtle background tint
+  doc.setFillColor(...T.bgTint);
+  doc.rect(0, 0, pageW, pageH, 'F');
+
+  // Hero band — gradient from heroFrom -> heroTo
+  const heroH = 280;
+  drawGradient(0, 0, pageW, heroH, T.heroFrom, T.heroTo);
+
+  // Pride rainbow strip across the very top
+  if (T.isPride) {
+    drawRainbow(0, 0, pageW, 6);
+  }
+
+  // White "heart badge" disc
+  const heartCx = pageW / 2;
+  const heartCy = 80;
+  doc.setFillColor(255, 255, 255);
+  doc.circle(heartCx, heartCy, 28, 'F');
+  // Subtle border ring
+  doc.setDrawColor(...T.heroTo);
+  doc.setLineWidth(1.5);
+  doc.circle(heartCx, heartCy, 28, 'S');
+  // Heart inside
+  drawHeart(heartCx, heartCy + 3, 9, T.accent2);
+
+  // Eyebrow
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  doc.setTextColor(...T.accent2);
+  doc.text('YOUR ANSWER SHEET', pageW / 2, heartCy + 50, {
+    align: 'center', charSpace: 1.6
+  });
+
+  // Big "about [Name]" headline — italic for the word, bold for the name
+  doc.setFont('times', 'italic');
+  doc.setFontSize(28);
+  doc.setTextColor(...T.ink);
+  doc.text('about', pageW / 2, heartCy + 92, { align: 'center' });
+
+  doc.setFont('times', 'bolditalic');
+  doc.setFontSize(48);
+  doc.setTextColor(...T.accent2);
+  doc.text(name, pageW / 2, heartCy + 145, { align: 'center' });
+
+  // Identity line
   const finalPronouns = state.pronouns === 'custom' ? state.pronounsCustom : state.pronouns;
   const finalGender = state.gender === 'other' ? state.genderCustom : state.gender;
   const idParts = [];
   if (finalPronouns && finalPronouns.trim()) idParts.push(finalPronouns.trim());
   if (finalGender && finalGender.trim()) idParts.push(finalGender.trim());
-  const idLine = idParts.join(' · ');
+  const idLine = idParts.join('  ·  ');
 
-  // ===== COVER PAGE =====
-  // Themed background band at top
-  doc.setFillColor(...T.bandBg);
-  doc.rect(0, 0, pageW, 180, 'F');
-
-  // Little heart (theme color)
-  doc.setFillColor(...T.heartFill);
-  doc.circle(pageW/2 - 8, 60, 8, 'F');
-  doc.circle(pageW/2 + 8, 60, 8, 'F');
-  doc.triangle(pageW/2 - 15, 62, pageW/2 + 15, 62, pageW/2, 82, 'F');
-
-  // Title
-  doc.setFont('times', 'italic');
-  doc.setFontSize(14);
-  doc.setTextColor(...T.titleColor);
-  doc.text('about me,', pageW/2, 110, { align: 'center' });
-
-  doc.setFont('times', 'bold');
-  doc.setFontSize(48);
-  doc.setTextColor(43, 29, 26);
-  doc.text(name, pageW/2, 158, { align: 'center' });
-
-  // Pronouns + gender line, below the band
-  let coverY = 210;
+  let coverY = heroH + 30;
   if (idLine) {
     doc.setFont('helvetica', 'normal');
     doc.setFontSize(12);
-    doc.setTextColor(...T.titleColor);
-    doc.text(idLine, pageW/2, coverY, { align: 'center' });
-    coverY += 30;
+    doc.setTextColor(...T.ink2);
+    doc.text(idLine, pageW / 2, coverY, { align: 'center' });
+    coverY += 24;
   }
 
-  // Subtitle
-  y = coverY + 18;
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(11);
-  doc.setTextColor(138, 116, 110);
-  doc.text("instead of 20 rounds of small talk, here's", pageW/2, y, { align: 'center' });
-  doc.text("everything you were gonna ask me anyway ✨", pageW/2, y + 16, { align: 'center' });
+  // Tagline (script-y feel — closest jsPDF can do is times italic)
+  doc.setFont('times', 'italic');
+  doc.setFontSize(15);
+  doc.setTextColor(...T.secondary2);
+  doc.text("here's everything — before you ask.", pageW / 2, coverY + 8, { align: 'center' });
+  coverY += 36;
 
-  y += 56;
-  doc.setDrawColor(...T.subAccent);
-  doc.setLineDashPattern([3, 3], 0);
-  doc.line(margin + 60, y, pageW - margin - 60, y);
-  doc.setLineDashPattern([], 0);
+  // Decorative dotted divider
+  doc.setDrawColor(...T.secondary);
+  doc.setLineWidth(1);
+  if (typeof doc.setLineDashPattern === 'function') {
+    doc.setLineDashPattern([2, 4], 0);
+  }
+  doc.line(margin + 80, coverY + 18, pageW - margin - 80, coverY + 18);
+  if (typeof doc.setLineDashPattern === 'function') {
+    doc.setLineDashPattern([], 0);
+  }
 
-  y += 36;
+  y = coverY + 50;
 
-  // ===== ANSWERS =====
+  /* ---------- ANSWERS ---------- */
   const all = getAllQuestions();
   const catLabels = {
-    basics:   '🌷 Basics',
-    vibes:    '🌿 Vibes',
-    favs:     '🎀 Favorites',
-    love:     '💌 Love',
-    identity: '🏳️‍🌈 Identity',
-    bro:      '💪 Bro Stuff',
-    girly:    '💅 Girly Things',
-    queer:    '🌈 Queer Life',
-    deep:     '🕯  Deeper',
-    fun:      '🍓 Fun',
-    spicy:    '🌶  Spicy',
-    custom:   '✨ My own questions',
+    basics: 'Basics', vibes: 'Vibes', favs: 'Favorites',
+    love: 'Love', identity: 'Identity', bro: 'Bro Stuff',
+    girly: 'Girly Things', queer: 'Queer Life', deep: 'Deeper',
+    fun: 'Fun', spicy: 'Spicy', custom: 'My own questions',
   };
 
   const byCat = {};
   all.forEach(q => {
     const ans = (state.answers[q.id] || '').trim();
-    if (!ans) return; // skip empty
+    if (!ans) return;
     if (!byCat[q.cat]) byCat[q.cat] = [];
     byCat[q.cat].push({ ...q, answer: ans });
   });
-
   const catOrder = ['basics','vibes','favs','love','identity','bro','girly','queer','deep','fun','spicy','custom'];
 
+  // Track current page so we can paint the bg tint when adding pages
+  const paintPageBg = () => {
+    doc.setFillColor(...T.bgTint);
+    doc.rect(0, 0, pageW, pageH, 'F');
+    if (T.isPride) drawRainbow(0, 0, pageW, 4);
+  };
+
   const checkPageBreak = (needed) => {
-    if (y + needed > pageH - margin) {
+    if (y + needed > pageH - margin - 20) {
+      drawPageFooter();
       doc.addPage();
+      paintPageBg();
       y = margin;
     }
   };
 
   let anyAnswered = false;
-
   catOrder.forEach(catKey => {
     if (!byCat[catKey] || byCat[catKey].length === 0) return;
     anyAnswered = true;
 
-    checkPageBreak(60);
+    checkPageBreak(80);
 
-    // Category header
+    // Italic serif category header — color matches accent2
     doc.setFont('times', 'bolditalic');
-    doc.setFontSize(22);
-    doc.setTextColor(...T.titleColor);
-    const label = (catLabels[catKey] || catKey).replace(/[^\x00-\x7F]/g, ''); // strip emoji
-    doc.text(label.trim(), margin, y);
-    y += 12;
+    doc.setFontSize(24);
+    doc.setTextColor(...T.accent2);
+    doc.text(catLabels[catKey] || catKey, margin, y);
+    y += 6;
 
-    // Cute underline
-    doc.setDrawColor(...T.subAccent);
-    doc.setLineWidth(1);
-    doc.line(margin, y, margin + 80, y);
-    y += 22;
+    // Themed accent rule beneath label
+    doc.setDrawColor(...T.secondary);
+    doc.setLineWidth(2);
+    doc.line(margin, y + 6, margin + 70, y + 6);
+    y += 30;
 
-    byCat[catKey].forEach(item => {
-      // Question
+    byCat[catKey].forEach((item, idx) => {
+      // Question — italic serif, smaller, ink2 color
       doc.setFont('times', 'italic');
-      doc.setFontSize(12.5);
-      doc.setTextColor(91, 72, 67);
+      doc.setFontSize(13);
+      doc.setTextColor(...T.ink2);
       const qLines = doc.splitTextToSize(item.q, contentW);
-      checkPageBreak(qLines.length * 15 + 40);
+      checkPageBreak(qLines.length * 16 + 60);
       doc.text(qLines, margin, y);
-      y += qLines.length * 15 + 4;
+      y += qLines.length * 16 + 6;
 
-      // Answer
+      // Answer — clean sans, dark ink
       doc.setFont('helvetica', 'normal');
-      doc.setFontSize(11);
-      doc.setTextColor(43, 29, 26);
+      doc.setFontSize(11.5);
+      doc.setTextColor(...T.ink);
       const aLines = doc.splitTextToSize(item.answer, contentW);
-      checkPageBreak(aLines.length * 14 + 20);
+      checkPageBreak(aLines.length * 15 + 24);
       doc.text(aLines, margin, y);
-      y += aLines.length * 14 + 20;
+      y += aLines.length * 15 + 14;
+
+      // Subtle dashed separator between Q/A pairs (except after last)
+      if (idx < byCat[catKey].length - 1) {
+        doc.setDrawColor(...T.ink4);
+        doc.setLineWidth(0.5);
+        if (typeof doc.setLineDashPattern === 'function') {
+          doc.setLineDashPattern([2, 3], 0);
+        }
+        doc.line(margin, y - 5, margin + contentW, y - 5);
+        if (typeof doc.setLineDashPattern === 'function') {
+          doc.setLineDashPattern([], 0);
+        }
+        y += 10;
+      }
     });
 
-    y += 10;
+    y += 22; // breathing room before next category
   });
 
   if (!anyAnswered) {
     doc.setFont('times', 'italic');
-    doc.setFontSize(14);
-    doc.setTextColor(138, 116, 110);
-    doc.text("(no answers yet — go back and fill some in ♡)", pageW/2, y + 40, { align: 'center' });
+    doc.setFontSize(15);
+    doc.setTextColor(...T.ink3);
+    doc.text("(no answers yet — go back and fill some in)", pageW / 2, y + 50, { align: 'center' });
   }
 
-  // Footer on last page
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(9);
-  doc.setTextColor(184, 168, 163);
-  doc.text(`${date} — made with About Me Pls ♡`, pageW/2, pageH - 30, { align: 'center' });
+  // Footer on the final page
+  drawPageFooter();
 
   const filename = `${name.replace(/[^a-z0-9]/gi, '_')}_aboutmepls.pdf`;
   doc.save(filename);
@@ -2087,9 +2693,6 @@ function escapeHtml(str) {
   div.textContent = str;
   return div.innerHTML;
 }
-
-// Auto-save every 3s just in case
-setInterval(saveState, 3000);
 
 init();
 </script>
