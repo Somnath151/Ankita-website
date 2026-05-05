@@ -10,6 +10,8 @@
 
   <!-- PDF library -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <!-- LZString compression for shorter share links -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
   <script>
     // Fallback flag — set after jsPDF loads (or fails)
     window._jspdfReady = false;
@@ -1663,11 +1665,11 @@
 
   /* ======================================================================
      SHARE-LINK ENCODING
-     Encodes the user's answers into a URL-safe base64 string appended to
-     the URL as a hash fragment (e.g. #me=eyJuIjoi...). Opening the link
-     pre-fills the page with those answers — no backend required.
+     JSON → LZString compress → URI-component encode → hash fragment.
+     Much shorter than plain base64, handles emojis & special chars fine.
+     The `v` flag in the payload signals "open preview on load".
      ====================================================================== */
-  function encodeState(s) {
+  function encodeState(s, openView = false) {
     const minimal = {};
     if (s.name) minimal.n = s.name;
     if (s.pronouns) minimal.p = s.pronouns;
@@ -1675,6 +1677,7 @@
     if (s.gender) minimal.g = s.gender;
     if (s.genderCustom) minimal.gc = s.genderCustom;
     if (s.theme && s.theme !== 'pink') minimal.t = s.theme;
+    if (openView) minimal.v = 1;
 
     const ans = {};
     for (const k of Object.keys(s.answers || {})) {
@@ -1692,19 +1695,35 @@
     if (s.custom && s.custom.length) minimal.c = s.custom;
 
     const json = JSON.stringify(minimal);
-    // UTF-8 safe base64 (handles emojis & special chars)
+
+    // Use LZString if available (much shorter), fall back to plain base64
+    if (window.LZString) {
+      return LZString.compressToEncodedURIComponent(json);
+    }
     const utf8 = unescape(encodeURIComponent(json));
     const b64 = btoa(utf8);
-    // URL-safe variant
     return b64.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
   }
 
   function decodeState(encoded) {
     try {
-      let b64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
-      while (b64.length % 4) b64 += '=';
-      const utf8 = atob(b64);
-      const json = decodeURIComponent(escape(utf8));
+      let json = null;
+
+      // Try LZString first (new compressed links)
+      if (window.LZString) {
+        try {
+          json = LZString.decompressFromEncodedURIComponent(encoded);
+        } catch (e) { json = null; }
+      }
+
+      // Fall back to plain base64 (old links still work)
+      if (!json) {
+        let b64 = encoded.replace(/-/g, '+').replace(/_/g, '/');
+        while (b64.length % 4) b64 += '=';
+        const utf8 = atob(b64);
+        json = decodeURIComponent(escape(utf8));
+      }
+
       const data = JSON.parse(json);
       const skipped = {};
       for (const k of Object.keys(data.s || {})) skipped[k] = true;
@@ -1718,6 +1737,7 @@
         answers: data.a || {},
         skipped,
         custom: data.c || [],
+        _openView: !!data.v,
       };
     } catch (e) {
       return null;
@@ -1731,18 +1751,18 @@
       const encoded = hash.slice(4);
       const decoded = decodeState(encoded);
       if (!decoded) return false;
+
+      const shouldOpenView = decoded._openView ||
+        new URLSearchParams(window.location.search).get('view') === '1'; // legacy support
+
       state = { ...state, ...decoded };
 
-      // Check if the link was shared with ?view=1 — if so, auto-open preview
-      const shouldOpenView = new URLSearchParams(window.location.search).get('view') === '1';
-
-      // Strip hash and view param so future reloads don't re-trigger
+      // Strip hash and any view param so future reloads don't re-trigger
       try {
         window.history.replaceState(null, '', window.location.pathname);
       } catch (e) {}
 
       if (shouldOpenView) {
-        // Open the preview modal after the page has fully rendered
         setTimeout(() => openPreview(), 400);
       } else {
         setTimeout(() => showToast('Loaded shared answers ♡'), 250);
@@ -1916,9 +1936,9 @@
      ====================================================================== */
   async function copyShareLink() {
     try {
-      const encoded = encodeState(state);
+      const encoded = encodeState(state, true); // true = include view flag in payload
       const base = window.location.origin + window.location.pathname;
-      const url = `${base}?view=1#me=${encoded}`;
+      const url = `${base}#me=${encoded}`;
 
       if (navigator.clipboard && navigator.clipboard.writeText) {
         await navigator.clipboard.writeText(url);
